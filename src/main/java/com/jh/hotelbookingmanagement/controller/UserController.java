@@ -10,7 +10,7 @@ import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
 import com.jh.hotelbookingmanagement.dto.request.UserCreationRequest;
 import com.jh.hotelbookingmanagement.dto.request.UserUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.UserResponse;
-import com.jh.hotelbookingmanagement.service.UserService;
+import com.jh.hotelbookingmanagement.service.Implement.UserService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

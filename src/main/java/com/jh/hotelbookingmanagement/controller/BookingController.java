@@ -2,7 +2,6 @@ package com.jh.hotelbookingmanagement.controller;
 
 import java.util.List;
 
-import com.jh.hotelbookingmanagement.dto.response.RoomResponse;
 import org.springframework.web.bind.annotation.*;
 
 import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
@@ -10,7 +9,7 @@ import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
 import com.jh.hotelbookingmanagement.dto.request.BookingUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingResponse;
 import com.jh.hotelbookingmanagement.entity.Booking;
-import com.jh.hotelbookingmanagement.service.BookingService;
+import com.jh.hotelbookingmanagement.service.Implement.BookingService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

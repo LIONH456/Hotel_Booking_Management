@@ -1,23 +1,34 @@
 package com.jh.hotelbookingmanagement.mapper;
 
-import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
-import com.jh.hotelbookingmanagement.dto.request.BookingUpdateRequest;
-import com.jh.hotelbookingmanagement.dto.request.BranchCreationRequest;
-import com.jh.hotelbookingmanagement.dto.response.BookingResponse;
-import com.jh.hotelbookingmanagement.dto.response.BranchResponse;
-import com.jh.hotelbookingmanagement.entity.Booking;
-import com.jh.hotelbookingmanagement.entity.Branch;
+import java.util.List;
+
+import com.jh.hotelbookingmanagement.dto.request.RoomCreationRequest;
+import com.jh.hotelbookingmanagement.dto.request.RoomUpdateRequest;
+import com.jh.hotelbookingmanagement.dto.response.RoomResponse;
+import com.jh.hotelbookingmanagement.entity.Room;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import java.util.List;
+import com.jh.hotelbookingmanagement.dto.request.BranchCreationRequest;
+import com.jh.hotelbookingmanagement.dto.request.BranchUpdateRequest;
+import com.jh.hotelbookingmanagement.dto.response.BranchResponse;
+import com.jh.hotelbookingmanagement.entity.Branch;
 
 @Mapper(componentModel = "spring")
 public interface BranchMapper {
+//    default Branch toBranchWithLogging(BranchCreationRequest request) {
+//        System.out.println("Mapping Request: " + request);
+//        Branch branch = toBranch(request);
+//        System.out.println("Mapped Entity: " + branch);
+//        return branch;
+//    }
+
     Branch toBranch(BranchCreationRequest request);
 
-    BranchResponse toBranchingResponse(Booking booking);
-    List<BranchResponse> toBranchRespone(List<Booking> bookings);
+    BranchResponse toBranchResponse(Branch branch);
 
-    void updateBranch(@MappingTarget Branch branch, BookingUpdateRequest request);
+    List<BranchResponse> toBranchResponse(List<Branch> branches);
+
+    void updateBranch(@MappingTarget Branch branch, BranchUpdateRequest request);
 }

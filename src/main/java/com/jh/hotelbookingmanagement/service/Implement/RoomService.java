@@ -1,11 +1,11 @@
-package com.jh.hotelbookingmanagement.service;
+package com.jh.hotelbookingmanagement.service.Implement;
 
 import java.util.List;
 
-import com.jh.hotelbookingmanagement.dto.request.RoomUpdateRequest;
 import org.springframework.stereotype.Service;
 
 import com.jh.hotelbookingmanagement.dto.request.RoomCreationRequest;
+import com.jh.hotelbookingmanagement.dto.request.RoomUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.RoomResponse;
 import com.jh.hotelbookingmanagement.entity.Room;
 import com.jh.hotelbookingmanagement.exception.AppException;
@@ -30,7 +30,7 @@ public class RoomService {
         Room room = roomMapper.toRoom(request);
         room = roomRepository.save(room);
 
-        log.info(room.getBranchId());
+        log.info(room.getBranchId()+"");
 
         return roomMapper.toRoomRespone(room);
     }
@@ -39,8 +39,9 @@ public class RoomService {
         return roomRepository.findAll().stream().map(roomMapper::toRoomRespone).toList();
     }
 
-    public RoomResponse getRoomById(String roomId){
-        return roomMapper.toRoomRespone(roomRepository.findById(roomId).orElseThrow(()->new AppException(ErrorCode.ROOM_NOT_FOUND)));
+    public RoomResponse getRoomById(String roomId) {
+        return roomMapper.toRoomRespone(
+                roomRepository.findById(roomId).orElseThrow(() -> new AppException(ErrorCode.ROOM_NOT_FOUND)));
     }
 
     public List<RoomResponse> getAllRoomByUser(String branchId) {
@@ -52,11 +53,11 @@ public class RoomService {
         return roomMapper.toRoomRespone(rooms);
     }
 
-    public void deleteRoomById(String roomId){
+    public void deleteRoomById(String roomId) {
         roomRepository.deleteById(roomId);
     }
 
-    public RoomResponse updateRoom(String roomId, RoomUpdateRequest request){
+    public RoomResponse updateRoom(String roomId, RoomUpdateRequest request) {
         Room room = roomRepository.findById(roomId).orElseThrow(() -> new AppException(ErrorCode.ROOM_NOT_FOUND));
 
         roomMapper.updateRoom(room, request);

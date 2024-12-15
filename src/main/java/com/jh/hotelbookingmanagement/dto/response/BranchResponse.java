@@ -1,11 +1,11 @@
 package com.jh.hotelbookingmanagement.dto.response;
 
-import com.jh.hotelbookingmanagement.entity.BookingMethod;
-import com.jh.hotelbookingmanagement.entity.BookingStatus;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -21,4 +21,10 @@ public class BranchResponse {
     Date startedDate;
     Date lastMaintenance;
     String branchPicture;
+
+    // For showing all room details
+    List<RoomResponse> rooms;
+
+    // For showing only room numbers
+    Set<String> roomNumbers;
 }

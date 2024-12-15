@@ -1,9 +1,9 @@
 package com.jh.hotelbookingmanagement.dto.request;
 
+import java.util.Date;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor

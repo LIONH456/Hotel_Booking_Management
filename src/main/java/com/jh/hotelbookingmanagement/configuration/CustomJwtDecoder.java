@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.stereotype.Component;
 
 import com.jh.hotelbookingmanagement.dto.request.IntrospectRequest;
-import com.jh.hotelbookingmanagement.service.AuthenticationService;
+import com.jh.hotelbookingmanagement.service.Implement.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
 
 @Component

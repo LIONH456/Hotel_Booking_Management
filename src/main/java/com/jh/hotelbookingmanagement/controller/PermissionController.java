@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
 import com.jh.hotelbookingmanagement.dto.request.PermissionRequest;
 import com.jh.hotelbookingmanagement.dto.response.PermissionResponse;
-import com.jh.hotelbookingmanagement.service.PermissionService;
+import com.jh.hotelbookingmanagement.service.Implement.PermissionService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

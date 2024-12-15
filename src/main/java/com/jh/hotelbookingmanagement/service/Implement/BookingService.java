@@ -1,8 +1,7 @@
-package com.jh.hotelbookingmanagement.service;
+package com.jh.hotelbookingmanagement.service.Implement;
 
 import java.util.List;
 
-import com.jh.hotelbookingmanagement.repository.RoomRepository;
 import org.springframework.stereotype.Service;
 
 import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
@@ -13,6 +12,7 @@ import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
 import com.jh.hotelbookingmanagement.mapper.BookingMapper;
 import com.jh.hotelbookingmanagement.repository.BookingRepository;
+import com.jh.hotelbookingmanagement.repository.RoomRepository;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,9 @@ public class BookingService {
     }
 
     public List<BookingResponse> getAllBookings() {
-        return bookingRepository.findAll().stream().map(bookingMapper::toBookingResponse).toList();
+        return bookingRepository.findAll().stream()
+                .map(bookingMapper::toBookingResponse)
+                .toList();
     }
 
     public BookingResponse getBooking(String bookingId) {

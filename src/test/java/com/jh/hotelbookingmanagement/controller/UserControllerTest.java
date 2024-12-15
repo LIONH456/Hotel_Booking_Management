@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.jh.hotelbookingmanagement.dto.request.UserCreationRequest;
 import com.jh.hotelbookingmanagement.dto.response.UserResponse;
-import com.jh.hotelbookingmanagement.service.UserService;
+import com.jh.hotelbookingmanagement.service.Implement.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -2,15 +2,13 @@ package com.jh.hotelbookingmanagement.controller;
 
 import java.util.List;
 
-import com.jh.hotelbookingmanagement.dto.request.RoomUpdateRequest;
-import com.jh.hotelbookingmanagement.dto.response.UserResponse;
-import com.jh.hotelbookingmanagement.entity.Room;
 import org.springframework.web.bind.annotation.*;
 
 import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
 import com.jh.hotelbookingmanagement.dto.request.RoomCreationRequest;
+import com.jh.hotelbookingmanagement.dto.request.RoomUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.RoomResponse;
-import com.jh.hotelbookingmanagement.service.RoomService;
+import com.jh.hotelbookingmanagement.service.Implement.RoomService;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -50,21 +48,23 @@ public class RoomController {
     }
 
     @DeleteMapping("/{roomId}")
-    public ApiResponse<String> deleteRoom(@PathVariable String roomId){
+    public ApiResponse<String> deleteRoom(@PathVariable String roomId) {
 
         roomService.deleteRoomById(roomId);
         return ApiResponse.<String>builder().result("Room has been deleted").build();
     }
 
     @PutMapping("/{roomId}")
-    public ApiResponse<RoomResponse> updateRoom(@PathVariable String roomId, @RequestBody RoomUpdateRequest request){
+    public ApiResponse<RoomResponse> updateRoom(@PathVariable String roomId, @RequestBody RoomUpdateRequest request) {
         return ApiResponse.<RoomResponse>builder()
                 .result(roomService.updateRoom(roomId, request))
                 .build();
     }
 
     @GetMapping("/{roomId}")
-    public ApiResponse<RoomResponse> getRoomById(@PathVariable String roomId){
-        return ApiResponse.<RoomResponse>builder().result(roomService.getRoomById(roomId)).build();
+    public ApiResponse<RoomResponse> getRoomById(@PathVariable String roomId) {
+        return ApiResponse.<RoomResponse>builder()
+                .result(roomService.getRoomById(roomId))
+                .build();
     }
 }

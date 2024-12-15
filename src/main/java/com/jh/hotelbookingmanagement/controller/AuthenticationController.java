@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jh.hotelbookingmanagement.dto.request.*;
 import com.jh.hotelbookingmanagement.dto.response.AuthenticationResponse;
 import com.jh.hotelbookingmanagement.dto.response.IntrospectResponse;
-import com.jh.hotelbookingmanagement.service.AuthenticationService;
+import com.jh.hotelbookingmanagement.service.Implement.AuthenticationService;
 import com.nimbusds.jose.JOSEException;
 
 import lombok.AccessLevel;

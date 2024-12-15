@@ -1,10 +1,9 @@
 package com.jh.hotelbookingmanagement.dto.request;
 
-import jakarta.persistence.Column;
+import java.util.Date;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +13,6 @@ import java.util.Date;
 public class BranchCreationRequest {
     String managerId;
     String branchPhoneNum;
-    String numberOfRooms;
     String address;
     Date startedDate;
     Date lastMaintenance;

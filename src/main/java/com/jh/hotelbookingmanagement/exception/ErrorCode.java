@@ -20,6 +20,7 @@ public enum ErrorCode {
     BOOKING_NOT_FOUND(1010, "There is no any booking yet!", HttpStatus.NOT_FOUND),
     BOOKING_NOT_FOUND_BY_USER(1011, "You have not make any booking yet!:(", HttpStatus.NOT_FOUND),
     ROOM_NOT_FOUND(1012, "No rooms found", HttpStatus.NOT_FOUND),
+    BRANCH_NOT_FOUND(1013, "No branch found", HttpStatus.NOT_FOUND)
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

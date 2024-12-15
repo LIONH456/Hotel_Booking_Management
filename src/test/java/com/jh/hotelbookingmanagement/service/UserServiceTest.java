@@ -22,6 +22,7 @@ import com.jh.hotelbookingmanagement.dto.response.UserResponse;
 import com.jh.hotelbookingmanagement.entity.User;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.repository.UserRepository;
+import com.jh.hotelbookingmanagement.service.Implement.UserService;
 
 @SpringBootTest
 @TestPropertySource("/test.properties")

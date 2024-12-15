@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.dto.request;
 
 import com.jh.hotelbookingmanagement.entity.RoomStatus;
 import com.jh.hotelbookingmanagement.entity.RoomType;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
