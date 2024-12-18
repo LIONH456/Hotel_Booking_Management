@@ -1,7 +1,6 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -41,8 +40,9 @@ public class BookingDetail {
     @Column(name = "Child")
     int child;
 
-    @Column(name = "Promotion_ID")
-    int promotionId;
+    @ManyToOne
+    @JoinColumn(name = "Promotion_ID", referencedColumnName = "Promotion_ID")
+    Promotion promotion;
 
     @ManyToOne
     @JoinColumn(name = "Booking_Status_ID", referencedColumnName = "Booking_Status_ID")
