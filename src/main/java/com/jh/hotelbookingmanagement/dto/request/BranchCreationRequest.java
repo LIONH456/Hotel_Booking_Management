@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.dto.request;
 
 import java.util.Date;
 
+import com.jh.hotelbookingmanagement.entity.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

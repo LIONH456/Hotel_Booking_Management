@@ -19,25 +19,32 @@ public class Payment {
     @Column(name = "Payment_ID")
     String paymentId;
 
-    @Column(name = "Booking_ID")
-    String bookingId;
+    @ManyToOne
+    @JoinColumn(name="Booking_ID", referencedColumnName = "Booking_ID")
+    Booking booking;
 
     @OneToOne
     @JoinColumn(name = "Payment_Type_ID", referencedColumnName = "Payment_Type_ID")
     PaymentType paymentType;
 
-    @Column(name = "Amount")
-    double amount;
-
     @Column(name = "Paid_Date")
     Date paidDate;
 
-    @Column(name = "Paid_By")
-    String paidBy;
+    @Column(name = "Service_Charges")
+    double serviceCharges;
 
-    @Column(name = "Service_Charge")
-    double serviceCharge;
+    @Column(name="Item_Charges")
+    double itemCharges;
+
+    @Column(name="Discount")
+    double discount;
+
+    @Column(name = "Amount")
+    double amount;
 
     @Column(name = "Total_Paid")
     double totalPaid;
+
+    @Column(name="Total")
+    double total;
 }

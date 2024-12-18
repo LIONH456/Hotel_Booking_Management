@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -13,18 +14,20 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "Booking_Detail")
+@Table(name = "Booking_Details")
 public class BookingDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "Booking_Detail_ID")
     String bookingDetailId;
 
-    @Column(name = "Booking_ID")
-    String bookingId;
+    @ManyToOne
+    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+    Booking booking;
 
-    @Column(name = "Room_ID")
-    String roomId;
+    @OneToOne
+    @JoinColumn(name="Room_ID", referencedColumnName = "Room_ID")
+    Room roomId;
 
     @Column(name = "Check_In_Date")
     Date checkInDate;
@@ -38,9 +41,10 @@ public class BookingDetail {
     @Column(name = "Child")
     int child;
 
-    @Column(name = "Accepted_By")
-    String acceptedBy;
-
     @Column(name = "Promotion_ID")
     int promotionId;
+
+    @ManyToOne
+    @JoinColumn(name = "Booking_Status_ID", referencedColumnName = "Booking_Status_ID")
+    BookingStatus bookingStatusId;
 }

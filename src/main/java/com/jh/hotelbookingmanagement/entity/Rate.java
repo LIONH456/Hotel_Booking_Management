@@ -20,11 +20,14 @@ public class Rate {
     @Column(name = "Rate_ID")
     int rateId;
 
-    @Column(name = "Room_ID")
-    String roomId;
+    @ManyToOne
+    @JoinColumn(name = "Room_ID", referencedColumnName = "Room_ID")
+    Room room;
 
-    @Column(name = "Rated_By")
-    String ratedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "Rated_By", referencedColumnName = "User_ID")
+    User ratedBy;
 
     @Column(name = "Rate_Date")
     Date rateDate;

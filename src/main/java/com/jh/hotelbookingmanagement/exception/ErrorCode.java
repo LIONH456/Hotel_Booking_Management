@@ -20,7 +20,15 @@ public enum ErrorCode {
     BOOKING_NOT_FOUND(1010, "There is no any booking yet!", HttpStatus.NOT_FOUND),
     BOOKING_NOT_FOUND_BY_USER(1011, "You have not make any booking yet!:(", HttpStatus.NOT_FOUND),
     ROOM_NOT_FOUND(1012, "No rooms found", HttpStatus.NOT_FOUND),
-    BRANCH_NOT_FOUND(1013, "No branch found", HttpStatus.NOT_FOUND)
+    BRANCH_NOT_FOUND(1013, "No branch found", HttpStatus.NOT_FOUND),
+    // Picture-specific error codes
+    FILE_NOT_SUPPORTED(2001, "File type is not supported", HttpStatus.BAD_REQUEST),
+    FILE_IS_EMPTY(2002, "File cannot be empty", HttpStatus.BAD_REQUEST),
+    FILE_SIZE_EXCEEDED(2003, "File size exceeds the maximum limit", HttpStatus.BAD_REQUEST),
+    FILE_UPLOAD_FAILED(2004, "Failed to upload the file", HttpStatus.INTERNAL_SERVER_ERROR),
+    FILE_PATH_INVALID(2005, "Invalid file path", HttpStatus.BAD_REQUEST),
+    FILE_SAVE_FAILED(2006, "Failed to save the file", HttpStatus.INTERNAL_SERVER_ERROR),
+    FILE_DELETE_FAILED(2007, "Failed to delete the file", HttpStatus.INTERNAL_SERVER_ERROR),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

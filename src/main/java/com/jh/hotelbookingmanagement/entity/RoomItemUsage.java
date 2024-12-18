@@ -21,8 +21,9 @@ public class RoomItemUsage {
     @Column(name = "Booking_ID")
     String bookingId;
 
-    @Column(name = "Item_ID")
-    int itemId;
+    @ManyToOne
+    @JoinColumn(name="Item_ID", referencedColumnName = "Item_ID")
+    RoomItem itemId;
 
     @Column(name = "Quantity")
     int quantity;

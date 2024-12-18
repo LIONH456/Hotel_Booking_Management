@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -23,10 +24,6 @@ public class Booking {
     String bookingId;
 
     @ManyToOne
-    @JoinColumn(name = "Booking_Status_ID", referencedColumnName = "Booking_Status_ID")
-    BookingStatus bookingStatusId;
-
-    @ManyToOne
     @JoinColumn(name = "Booking_Method_ID", referencedColumnName = "Booking_Method_ID")
     BookingMethod bookingMethodId;
 
@@ -36,6 +33,10 @@ public class Booking {
     @Column(name = "Room_Count")
     int roomCount;
 
-    @Column(name = "Booked_By")
-    String bookedBy;
+    @ManyToOne
+    @JoinColumn(name = "Booked_By", referencedColumnName = "User_ID")
+    User bookedBy;
+
+    @Column(name = "Active")
+    boolean active;
 }

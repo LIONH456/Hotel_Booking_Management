@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.entity;
 
 import jakarta.persistence.*;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class RoomItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Item_ID")
-    int itemId;
+    Integer itemId;
 
     @Column(name = "Item_Name")
     String itemName;

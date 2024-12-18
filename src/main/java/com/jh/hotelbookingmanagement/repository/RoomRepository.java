@@ -11,8 +11,8 @@ import com.jh.hotelbookingmanagement.entity.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, String> {
-    List<Room> findAllByBranchId(String branchId);
-    @Query(value = "SELECT COUNT(*) FROM Room r WHERE r.branch.branchId = ?1", nativeQuery = true)
+    List<Room> findAllByBranch_BranchId(String branchId);
+    @Query(value = "SELECT COUNT(*) FROM Room r WHERE r.branchId.branchId = ?1", nativeQuery = true)
     int countRoomsByBranchId(@Param("branchId") String branchId);
 
 }

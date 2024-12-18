@@ -25,8 +25,9 @@ public class ServiceUsage {
     @Column(name = "Booking_ID")
     String bookingId;
 
-    @Column(name = "Service_ID")
-    int serviceId;
+    @ManyToOne
+    @JoinColumn(name="Service_ID", referencedColumnName = "Service_ID")
+    Services serviceId;
 
     @Column(name = "Date_Used")
     Date serviceUsedDate;

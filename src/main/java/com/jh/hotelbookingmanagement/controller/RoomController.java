@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.controller;
 
 import java.util.List;
 
+import com.jh.hotelbookingmanagement.repository.BranchRepository;
 import org.springframework.web.bind.annotation.*;
 
 import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
@@ -23,10 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Builder
 public class RoomController {
+    private final BranchRepository branchRepository;
     RoomService roomService;
 
     @PostMapping
     public ApiResponse<RoomResponse> createRoom(@RequestBody RoomCreationRequest request) {
+        log.info(request.getBranchId());
         return ApiResponse.<RoomResponse>builder()
                 .result(roomService.createRoom(request))
                 .build();

@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.service.Implement;
 
 import java.util.List;
 
+import com.jh.hotelbookingmanagement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
@@ -30,11 +31,23 @@ public class BookingService {
 
     BookingMapper bookingMapper;
 
+    UserRepository userRepository;
+
     public BookingResponse createRequest(BookingCreationRequest request) {
-        if (request.getBookingStatusId() == null) throw new AppException(ErrorCode.INVALID_STATUS);
 
         Booking booking = bookingMapper.toBooking(request);
-
+        booking.setBookedBy(userRepository.findById(request.getBookedBy()).orElseThrow(()->new AppException(ErrorCode.USER_NOT_EXISTED)));
+        log.info(booking.getBookedBy() + "");
+//        List<String> bookingStatuses = bookingRepository.isActive(booking.getBookingId());
+//        booking.setActive(true);
+//        log.info("this works");
+//        for(String bookingStatus:bookingStatuses) {
+//            log.info("Loop Work");
+//            if (bookingStatus == "1") {
+//                booking.setActive(false);
+//                log.info(bookingStatus);
+//            }
+//        }
         booking = bookingRepository.save(booking);
         return bookingMapper.toBookingResponse(booking);
     }
@@ -63,6 +76,6 @@ public class BookingService {
     }
 
     public List<Booking> getBookingsByUser(String userId) {
-        return bookingRepository.findByBookedBy(userId);
+        return bookingRepository.findByBookedByUserId(userId);
     }
 }

@@ -1,7 +1,10 @@
 package com.jh.hotelbookingmanagement.dto.response;
 
 import java.util.Date;
+import java.util.List;
 
+import com.jh.hotelbookingmanagement.entity.BookingDetail;
+import com.jh.hotelbookingmanagement.entity.User;
 import jakarta.persistence.*;
 
 import com.jh.hotelbookingmanagement.entity.BookingMethod;
@@ -17,9 +20,10 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class BookingResponse {
     String bookingId;
-    BookingStatus bookingStatusId;
     BookingMethod bookingMethodId;
     Date bookedDate;
     int roomCount;
-    String bookedBy;
+    User bookedBy;
+    List<BookingDetail> bookingDetails;
+    boolean active;
 }

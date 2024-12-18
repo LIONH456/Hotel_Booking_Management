@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import com.jh.hotelbookingmanagement.entity.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -14,7 +15,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class BranchResponse {
     String branchId;
-    String managerId;
+    User managerId;
     String branchPhoneNum;
     String numberOfRooms;
     String address;

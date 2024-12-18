@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.service.Implement;
 
 import java.util.List;
 
+import com.jh.hotelbookingmanagement.repository.BranchRepository;
 import org.springframework.stereotype.Service;
 
 import com.jh.hotelbookingmanagement.dto.request.RoomCreationRequest;
@@ -25,14 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 public class RoomService {
     RoomRepository roomRepository;
     RoomMapper roomMapper;
+    BranchRepository branchRepository;
 
     public RoomResponse createRoom(RoomCreationRequest request) {
         Room room = roomMapper.toRoom(request);
+        room.setBranch(branchRepository.findById(request.getBranchId()).orElseThrow(()->new AppException(ErrorCode.BRANCH_NOT_FOUND)));
         room = roomRepository.save(room);
-
-        log.info(room.getBranchId()+"");
-
-        return roomMapper.toRoomRespone(room);
+        return RoomResponse.fromRoom(room);
     }
 
     public List<RoomResponse> getAllRoom() {
@@ -46,7 +46,7 @@ public class RoomService {
 
     public List<RoomResponse> getAllRoomByUser(String branchId) {
 
-        List<Room> rooms = roomRepository.findAllByBranchId(branchId);
+        List<Room> rooms = roomRepository.findAllByBranch_BranchId(branchId);
         if (rooms.isEmpty()) {
             throw new AppException(ErrorCode.ROOM_NOT_FOUND);
         }

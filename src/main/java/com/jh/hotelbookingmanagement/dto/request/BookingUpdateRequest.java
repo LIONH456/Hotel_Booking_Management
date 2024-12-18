@@ -11,6 +11,5 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingUpdateRequest {
-    BookingStatus bookingStatusId;
     int roomCount;
 }

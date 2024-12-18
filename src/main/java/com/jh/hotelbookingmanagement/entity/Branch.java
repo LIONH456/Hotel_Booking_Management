@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -20,8 +21,9 @@ public class Branch {
     @Column(name = "Branch_ID")
     String branchId;
 
-    @Column(name = "Manager_ID")
-    String managerId;
+    @OneToOne
+    @JoinColumn(name = "Manager_ID", referencedColumnName = "User_ID")
+    User managerId;
 
     @Column(name = "Branch_Phone_Num")
     String branchPhoneNum;
@@ -35,9 +37,14 @@ public class Branch {
     @Column(name = "Started_Date")
     Date startedDate;
 
-    @Column(name = "Last_Metenanance")
+    @Column(name = "Last_Maintenance_Date")
     Date lastMaintenance;
 
-    @Column(name = "Branch_Picture")
-    String branchPicture;
+    @ManyToMany
+    @JoinTable(
+            name = "branch_pictures",
+            joinColumns = @JoinColumn(name = "branch_id"),
+            inverseJoinColumns = @JoinColumn(name = "picture_id")
+    )
+    List<Picture> pictures;
 }

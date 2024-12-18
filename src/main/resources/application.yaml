@@ -19,3 +19,6 @@ jwt:
   signerKey: "XPtCW+54S4SdZKvhWyFecy7onxF0kIpptVt2T/mLCBzVjBzS8qxGuwFuDR+fy0FQ"
   valid-duration: 3600 # in second
   refreshable-duration: 36000 # in seconds
+
+picture:
+    storage-path: src/main/resources/static/images

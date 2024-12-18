@@ -4,6 +4,8 @@ import java.util.Date;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.apache.catalina.Manager;
+import org.apache.catalina.User;
 
 @Data
 @AllArgsConstructor

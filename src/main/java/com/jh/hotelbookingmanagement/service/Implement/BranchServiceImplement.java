@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.jh.hotelbookingmanagement.dto.request.BranchUpdateRequest;
-import com.jh.hotelbookingmanagement.dto.request.UserUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.RoomResponse;
-import com.jh.hotelbookingmanagement.dto.response.UserResponse;
 import com.jh.hotelbookingmanagement.entity.Room;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
+import com.jh.hotelbookingmanagement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import com.jh.hotelbookingmanagement.dto.request.BranchCreationRequest;
@@ -24,7 +23,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Service
@@ -34,17 +32,20 @@ public class BranchServiceImplement implements BranchService {
     BranchRepository branchRepository;
     RoomRepository roomRepository;
     BranchMapper branchMapper;
+    UserRepository userRepository;
 
     // Create a new branch
     @Override
     public BranchResponse createBranch(BranchCreationRequest request) {
         Branch branch = branchMapper.toBranch(request);
         // Save the branch entity first to get the branch ID
-        branch = branchRepository.save(branch);
+//        branch = branchRepository.save(branch);
 
         // Count the number of rooms associated with this branch
-        int roomCount = roomRepository.countRoomsByBranchId(branch.getBranchId());
-        branch.setNumberOfRooms(String.valueOf(roomCount)); // Update the number of rooms
+        // int roomCount = roomRepository.countRoomsByBranchId(branch.getBranchId());
+        branch.setNumberOfRooms(String.valueOf(0)); // Update the number of rooms
+        var manager = userRepository.findById(request.getManagerId()).orElseThrow(()->new AppException(ErrorCode.USER_NOT_EXISTED)); // Set manager to null if no user is found
+        branch.setManagerId(manager);
 
         // Save the branch again with the updated room count
         branch = branchRepository.save(branch);
@@ -59,7 +60,7 @@ public class BranchServiceImplement implements BranchService {
 
         return branches.stream().map(branch -> {
             BranchResponse branchResponse = branchMapper.toBranchResponse(branch);
-            List<Room> rooms = roomRepository.findAllByBranchId(branch.getBranchId());
+            List<Room> rooms = roomRepository.findAllByBranch_BranchId(branch.getBranchId());
             branchResponse.setRooms(rooms.stream().map(RoomResponse::fromRoom).collect(Collectors.toList()));
             branchResponse.setRoomNumbers(rooms.stream().map(Room::getRoomNumber).collect(Collectors.toSet()));
             return branchResponse;
@@ -73,8 +74,8 @@ public class BranchServiceImplement implements BranchService {
         Branch currentBranch = branchRepository.findById(branchId)
                 .orElseThrow(() -> new AppException(ErrorCode.BRANCH_NOT_FOUND));
 
-        // Fetch associated rooms
-        List<Room> rooms = roomRepository.findAllByBranchId(currentBranch.getBranchId());
+        //Fetch associated rooms
+        List<Room> rooms = roomRepository.findAllByBranch_BranchId(currentBranch.getBranchId());
 
         // Create BranchResponse and populate it with data
         BranchResponse branchResponse = branchMapper.toBranchResponse(currentBranch);
@@ -96,7 +97,8 @@ public class BranchServiceImplement implements BranchService {
     public BranchResponse updateBranch(String branchId, BranchUpdateRequest request) {
         Branch branch = branchRepository.findById(branchId)
                 .orElseThrow(() -> new AppException(ErrorCode.BRANCH_NOT_FOUND));
-
+        var manager = userRepository.findById(request.getManagerId()).orElseThrow(()->new AppException(ErrorCode.USER_NOT_EXISTED)); // Set manager to null if no user is found
+        branch.setManagerId(manager);
         branchMapper.updateBranch(branch, request);
 
         return branchMapper.toBranchResponse(branchRepository.save(branch));

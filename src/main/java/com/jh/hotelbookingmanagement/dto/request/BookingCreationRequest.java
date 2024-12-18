@@ -7,6 +7,7 @@ import com.jh.hotelbookingmanagement.entity.BookingStatus;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.mapstruct.Mapping;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +15,6 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingCreationRequest {
-    BookingStatus bookingStatusId;
     BookingMethod bookingMethodId;
     Date bookedDate;
     int roomCount;

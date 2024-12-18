@@ -17,18 +17,20 @@ import com.jh.hotelbookingmanagement.entity.Branch;
 
 @Mapper(componentModel = "spring")
 public interface BranchMapper {
-//    default Branch toBranchWithLogging(BranchCreationRequest request) {
-//        System.out.println("Mapping Request: " + request);
-//        Branch branch = toBranch(request);
-//        System.out.println("Mapped Entity: " + branch);
-//        return branch;
-//    }
+/*   default Branch toBranchWithLogging(BranchCreationRequest request) {
+        System.out.println("Mapping Request: " + request);
+        Branch branch = toBranch(request);
+        System.out.println("Mapped Entity: " + branch);
+        return branch;
+    }*/
 
+    @Mapping(target = "managerId", ignore = true)
     Branch toBranch(BranchCreationRequest request);
 
     BranchResponse toBranchResponse(Branch branch);
 
     List<BranchResponse> toBranchResponse(List<Branch> branches);
 
+    @Mapping(target = "managerId", ignore = true)
     void updateBranch(@MappingTarget Branch branch, BranchUpdateRequest request);
 }

@@ -9,7 +9,9 @@ import com.jh.hotelbookingmanagement.entity.RoomType;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,10 +29,14 @@ public class RoomResponse {
 
 
     public static RoomResponse fromRoom(Room room) {
+        log.info(room.getBranch().getBranchId());
         return RoomResponse.builder()
+                .roomId(room.getRoomId())
                 .roomNumber(room.getRoomNumber())
                 .roomTypeId(room.getRoomTypeId())
                 .roomStatusId(room.getRoomStatusId())
+                .branchId(room.getBranch().getBranchId())
+                .description(room.getDescription())
                 .price(room.getPrice())
                 .build();
     }
