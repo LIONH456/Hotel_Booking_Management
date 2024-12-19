@@ -14,14 +14,14 @@ import com.jh.hotelbookingmanagement.entity.Room;
 @Mapper(componentModel = "spring")
 public interface RoomMapper {
 
-    @Mapping(target = "branchId", ignore = true)
+    @Mapping(target = "branch", ignore = true)
     Room toRoom(RoomCreationRequest request);
 
-    @Mapping(target = "branchId", ignore = true)
+    @Mapping(target = "branchId", source = "branch.branchId")
     RoomResponse toRoomRespone(Room room);
 
     List<RoomResponse> toRoomRespone(List<Room> rooms);
 
-    @Mapping(target = "branchId", ignore = true)
+    @Mapping(target = "branch", ignore = true)
     void updateRoom(@MappingTarget Room room, RoomUpdateRequest request);
 }

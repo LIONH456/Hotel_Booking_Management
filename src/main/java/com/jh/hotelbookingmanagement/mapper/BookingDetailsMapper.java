@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.mapper;
 
 import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
 import com.jh.hotelbookingmanagement.dto.request.BookingDetailRequest;
+import com.jh.hotelbookingmanagement.dto.request.BookingDetailUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.request.BookingUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingDetailResponse;
 import com.jh.hotelbookingmanagement.dto.response.BookingResponse;
@@ -15,9 +16,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BookingDetailsMapper {
+    @Mapping(target = "booking", ignore = true)
     BookingDetail toBookingDetail(BookingDetailRequest request);
 
+    @Mapping(target = "bookingId", source = "booking.bookingId")
     BookingDetailResponse toBookingDetailResponse(BookingDetail bookingDetail);
 
-    void updateBookingDetail(@MappingTarget BookingDetail bookingDetail, BookingDetailRequest request);
+    @Mapping(target = "booking", ignore = true)
+    void updateBookingDetail(@MappingTarget BookingDetail bookingDetail, BookingDetailUpdateRequest request);
 }

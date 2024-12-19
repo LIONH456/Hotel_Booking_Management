@@ -29,6 +29,7 @@ public enum ErrorCode {
     FILE_PATH_INVALID(2005, "Invalid file path", HttpStatus.BAD_REQUEST),
     FILE_SAVE_FAILED(2006, "Failed to save the file", HttpStatus.INTERNAL_SERVER_ERROR),
     FILE_DELETE_FAILED(2007, "Failed to delete the file", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_PICTURE_CATEGORY(2008, "Invalid Picture Category", HttpStatus.BAD_REQUEST),
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

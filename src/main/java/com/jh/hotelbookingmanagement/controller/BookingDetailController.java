@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.controller;
 
 import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
 import com.jh.hotelbookingmanagement.dto.request.BookingDetailRequest;
+import com.jh.hotelbookingmanagement.dto.request.BookingDetailUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingDetailResponse;
 import com.jh.hotelbookingmanagement.dto.response.BookingResponse;
 import com.jh.hotelbookingmanagement.service.BookingDetailService;
@@ -16,7 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/bookingsDetails")
+@RequestMapping("/bookingdetails")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingDetailController {
     BookingDetailService bookingDetailService;
@@ -28,28 +29,32 @@ public class BookingDetailController {
                 .build();
     }
 
-//    @GetMapping
-//    ApiResponse<List<BookingResponse>> getBookings() {
-//        return ApiResponse.<List<BookingResponse>>builder()
-//                .result(bookingService.getAllBookings())
-//                .build();
-//    }
-//
-//    @GetMapping("/{bookingId}")
-//    BookingResponse getBooking(@PathVariable("bookingId") String bookingId) {
-//        return bookingService.getBooking(bookingId);
-//    }
-//
-//    @PutMapping("/{bookingId}")
-//    BookingResponse updateBooking(@PathVariable String bookingId, @RequestBody BookingUpdateRequest request) {
-//        return bookingService.updateBooking(bookingId, request);
-//    }
-//
-//    @DeleteMapping("/{bookingId}")
-//    String deleteBooking(@PathVariable String bookingId) {
-//        bookingService.deleteBooking(bookingId);
-//        return "Booking has been Deleted!";
-//    }
+    @GetMapping
+    ApiResponse<List<BookingDetailResponse>> getBookings() {
+        return ApiResponse.<List<BookingDetailResponse>>builder()
+                .result(bookingDetailService.getBookingDetails())
+                .build();
+    }
+
+    @GetMapping("/{bookingDetailId}")
+    ApiResponse<BookingDetailResponse> getBooking(@PathVariable("bookingDetailId") String bookingDetailId) {
+        return ApiResponse.<BookingDetailResponse>builder()
+                .result(bookingDetailService.getBookingDetail(bookingDetailId))
+                .build();
+    }
+
+    @PutMapping("/{bookingDetailId}")
+    ApiResponse<BookingDetailResponse> updateBooking(@PathVariable String bookingDetailId, @RequestBody BookingDetailUpdateRequest request) {
+        return ApiResponse.<BookingDetailResponse>builder()
+                .result(bookingDetailService.updateBookingDetail(bookingDetailId, request))
+                .build();
+    }
+
+    @DeleteMapping("/{bookingId}")
+    ApiResponse<String> deleteBooking(@PathVariable String bookingId) {
+        bookingDetailService.deleteBookingDetail(bookingId);
+        return ApiResponse.<String>builder().result("Booking has been Deleted!").build();
+    }
 //
 //    @GetMapping("/usersId:a{userId}")
 //    List<Booking> getBookingsByUser(@PathVariable String userId) {

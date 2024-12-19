@@ -1,10 +1,7 @@
 package com.jh.hotelbookingmanagement.dto.request;
 
-import com.jh.hotelbookingmanagement.entity.Booking;
 import com.jh.hotelbookingmanagement.entity.BookingStatus;
 import com.jh.hotelbookingmanagement.entity.Promotion;
-import com.jh.hotelbookingmanagement.entity.Room;
-import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,8 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class BookingDetailRequest {
-    String bookingId;
+public class BookingDetailUpdateRequest {
     String roomId;
     Date checkInDate;
     Date checkOutDate;

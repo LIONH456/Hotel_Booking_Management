@@ -19,15 +19,18 @@ public class Picture {
     @Column(name = "Picture_ID")
     Long pictureId;
 
+    @Column(name="Picture_Name")
+    String name;
+
     @Column(name = "Picture_Path")
-    String picturePath;
+    String path;
 
-    @Column(name = "Description")
-    String description;
-
-    @Column(name = "Upload_Date")
+    // updatable = false: Once a value is set, it cannot be modified through JPA updates.
+    // @Temporal(TemporalType.TIMESTAMP): This specifies that the database column should store both date and time information
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "Upload_Date", updatable = false)
     Date uploadDate;
 
-    @Column(name="category")
-    String category;
+    @ManyToOne
+    PictureCategory category;
 }

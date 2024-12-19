@@ -14,7 +14,7 @@ public interface BranchService {
 
     public BranchResponse getBranchInfo(String branchId);
 
-    public BranchResponse updateBranch(String brandId, BranchUpdateRequest request);
+    public BranchResponse updateBranch(String branchId, BranchUpdateRequest request);
 
-    public void deleteBranch(String brandId);
+    public void deleteBranch(String branchId);
 }

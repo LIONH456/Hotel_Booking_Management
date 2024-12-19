@@ -32,7 +32,7 @@ public class RoomService {
         Room room = roomMapper.toRoom(request);
         room.setBranch(branchRepository.findById(request.getBranchId()).orElseThrow(()->new AppException(ErrorCode.BRANCH_NOT_FOUND)));
         room = roomRepository.save(room);
-        return RoomResponse.fromRoom(room);
+        return roomMapper.toRoomRespone(room);
     }
 
     public List<RoomResponse> getAllRoom() {
@@ -45,7 +45,6 @@ public class RoomService {
     }
 
     public List<RoomResponse> getAllRoomByUser(String branchId) {
-
         List<Room> rooms = roomRepository.findAllByBranch_BranchId(branchId);
         if (rooms.isEmpty()) {
             throw new AppException(ErrorCode.ROOM_NOT_FOUND);

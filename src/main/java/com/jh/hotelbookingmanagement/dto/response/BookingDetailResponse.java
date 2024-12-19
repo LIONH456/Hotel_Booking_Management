@@ -1,6 +1,5 @@
 package com.jh.hotelbookingmanagement.dto.response;
 
-import com.jh.hotelbookingmanagement.entity.Booking;
 import com.jh.hotelbookingmanagement.entity.BookingStatus;
 import com.jh.hotelbookingmanagement.entity.Promotion;
 import com.jh.hotelbookingmanagement.entity.Room;
@@ -16,8 +15,8 @@ import java.util.Date;
 @Builder
 public class BookingDetailResponse {
     String bookingDetailId;
-    Booking booking;
-    Room roomId;
+    String bookingId;
+    Room room;
     Date checkInDate;
     Date checkOutDate;
     int adult;

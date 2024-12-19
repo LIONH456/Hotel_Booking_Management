@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.service;
 
 import com.jh.hotelbookingmanagement.dto.request.BookingDetailRequest;
+import com.jh.hotelbookingmanagement.dto.request.BookingDetailUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingDetailResponse;
 import com.jh.hotelbookingmanagement.entity.BookingDetail;
 
@@ -11,9 +12,9 @@ public interface BookingDetailService {
 
     public List<BookingDetailResponse> getBookingDetails();
 
-    public BookingDetail getBookingDetail(String branchId);
+    public BookingDetailResponse getBookingDetail(String bookingDetailId);
 
-    public BookingDetail updateBookingDetail(String brandId, BookingDetailRequest request);
+    public BookingDetailResponse updateBookingDetail(String bookingDetailId, BookingDetailUpdateRequest request);
 
     public void deleteBookingDetail(String bookingDetailId);
 }

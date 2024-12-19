@@ -24,9 +24,9 @@ public class BookingDetail {
     @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
     Booking booking;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="Room_ID", referencedColumnName = "Room_ID")
-    Room roomId;
+    Room room;
 
     @Column(name = "Check_In_Date")
     Date checkInDate;
