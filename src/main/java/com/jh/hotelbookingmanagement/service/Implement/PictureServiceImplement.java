@@ -42,7 +42,7 @@ public class PictureServiceImplement implements PictureService {
     protected String UPLOAD_DIR;
 
     @Override
-    public PictureResponse uploadPicture(MultipartFile file, String category) throws Exception {
+    public PictureResponse uploadPicture(MultipartFile file, String category) {
         // check if the file is validated
         validateFile(file);
 
@@ -76,7 +76,7 @@ public class PictureServiceImplement implements PictureService {
     }
 
     @Override
-    public void deletePicture(Long pictureId) throws Exception {
+    public void deletePicture(Long pictureId) {
         Picture picture = pictureRepository.findById(pictureId)
                 .orElseThrow(() -> new AppException(ErrorCode.FILE_PATH_INVALID));
         Path filePath = Paths.get(picture.getPath());

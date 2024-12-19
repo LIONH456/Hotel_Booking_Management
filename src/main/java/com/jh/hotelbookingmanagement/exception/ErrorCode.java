@@ -30,6 +30,9 @@ public enum ErrorCode {
     FILE_SAVE_FAILED(2006, "Failed to save the file", HttpStatus.INTERNAL_SERVER_ERROR),
     FILE_DELETE_FAILED(2007, "Failed to delete the file", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_PICTURE_CATEGORY(2008, "Invalid Picture Category", HttpStatus.BAD_REQUEST),
+    // Sql File
+    FILE_READ_ERROR(1101, "Error reading SQL file", HttpStatus.BAD_REQUEST),
+    SQL_EXECUTION_ERROR(1102, "Error executing SQL file", HttpStatus.INTERNAL_SERVER_ERROR);
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

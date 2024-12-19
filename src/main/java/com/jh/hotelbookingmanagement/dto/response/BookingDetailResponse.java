@@ -16,7 +16,8 @@ import java.util.Date;
 public class BookingDetailResponse {
     String bookingDetailId;
     String bookingId;
-    Room room;
+    String branchId;
+    String roomNumber;
     Date checkInDate;
     Date checkOutDate;
     int adult;

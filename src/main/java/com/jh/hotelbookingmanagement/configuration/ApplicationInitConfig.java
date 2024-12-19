@@ -5,7 +5,8 @@ import java.util.HashSet;
 import com.jh.hotelbookingmanagement.constant.PredefinedPictureCategory;
 import com.jh.hotelbookingmanagement.entity.Picture;
 import com.jh.hotelbookingmanagement.entity.PictureCategory;
-import com.jh.hotelbookingmanagement.repository.PictureCategoryRepository;
+import com.jh.hotelbookingmanagement.repository.*;
+import com.jh.hotelbookingmanagement.service.SqlFileExecutorService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import com.jh.hotelbookingmanagement.constant.PredefinedRole;
 import com.jh.hotelbookingmanagement.entity.Role;
 import com.jh.hotelbookingmanagement.entity.User;
-import com.jh.hotelbookingmanagement.repository.RoleRepository;
-import com.jh.hotelbookingmanagement.repository.UserRepository;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApplicationInitConfig {
 
+    SqlFileExecutorService sqlFileExecutorService;
     PasswordEncoder passwordEncoder;
 
     @NonFinal
@@ -43,7 +43,9 @@ public class ApplicationInitConfig {
             prefix = "spring",
             value = "datasource.driverClassName",
             havingValue = "com.mysql.cj.jdbc.Driver")
-    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, PictureCategoryRepository pictureCategoryRepository) {
+    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, PictureCategoryRepository pictureCategoryRepository, BookingMethodRepository bookingMethodRepository,
+                                        BookingStatusRepository bookingStatusRepository,
+                                        PaymentTypeRepository paymentTypeRepository) {
         log.info("Initializing application.....");
         return args -> {
             if (userRepository.findByUsername(ADMIN_USER_NAME).isEmpty()) {
@@ -82,8 +84,22 @@ public class ApplicationInitConfig {
                         .build());
                 log.warn("ROOM and BRANCH have been initial added into picture category");
             }
+            if(bookingMethodRepository.findAll().isEmpty()){
+                sqlFileExecutorService.executeSqlFile("src/main/resources/Static/SQL Script/InsertBookingMethod.sql");
+                log.warn("Initialize Booking Method");
+            }
 
+            if(bookingStatusRepository.findAll().isEmpty()){
+                sqlFileExecutorService.executeSqlFile("src/main/resources/Static/SQL Script/InsertBookingStatuses.sql");
+                log.warn("Initialize Booking Status");
+            }
+
+            if(paymentTypeRepository.findAll().isEmpty()){
+                sqlFileExecutorService.executeSqlFile("src/main/resources/Static/SQL Script/InsertPaymentType.sql");
+                log.warn("Initialize Payment Type");
+            }
             log.info("Application initialization completed .....");
+            
         };
     }
 }

@@ -16,7 +16,7 @@ public class BookingMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Booking_Method_ID")
-    int bookingMethodId;
+    Integer bookingMethodId;
 
     @Column(name = "Booking_Method")
     String bookingMethodName;

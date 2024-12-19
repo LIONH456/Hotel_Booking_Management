@@ -20,6 +20,9 @@ public interface BookingDetailsMapper {
     BookingDetail toBookingDetail(BookingDetailRequest request);
 
     @Mapping(target = "bookingId", source = "booking.bookingId")
+    @Mapping(target = "roomNumber", source = "room.roomNumber")
+
+    @Mapping(target = "branchId", source = "room.branch.branchId")
     BookingDetailResponse toBookingDetailResponse(BookingDetail bookingDetail);
 
     @Mapping(target = "booking", ignore = true)
