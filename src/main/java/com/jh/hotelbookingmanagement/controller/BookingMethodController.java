@@ -53,7 +53,7 @@ public class BookingMethodController {
     @DeleteMapping("/{bookingMethodId}")
     ApiResponse<String> deleteBookingMethod(@PathVariable Long bookingMethodId) {
         bookingMethodService.deleteBookingMethod(bookingMethodId);
-        return ApiResponse.<String>builder().result("Booking Method has been Deleted!").build();
+        return ApiResponse.<String>builder().result("This booking method has been Deleted!").build();
     }
 //
 //    @GetMapping("/usersId:a{userId}")
