@@ -28,11 +28,6 @@ public class BookingMethodServiceImplement implements BookingMethodService {
     @Override
     public BookingMethodResponse createBookingMethod(BookingMethodRequest request) {
         BookingMethod bookingMethod = bookingMethodMapper.toBookingMethod(request);
-//        if(bookingMethodRepository.existsByBookingMethodName(request.getBookingMethodName()))
-//        {
-//            log.info(ErrorCode.DUPLICATED_KEY.getMessage().replace("attribute", "booking method"));
-//            throw new AppException(ErrorCode.DUPLICATED_KEY);
-//        }
 
         bookingMethod = bookingMethodRepository.save(bookingMethod);
         return bookingMethodMapper.toBookingMethodResponse(bookingMethod);
@@ -49,10 +44,6 @@ public class BookingMethodServiceImplement implements BookingMethodService {
         BookingMethod bookingMethod = bookingMethodRepository.findById(bookingMethodId)
                 .orElseThrow(()->new AppException(ErrorCode.BOOKING_METHOD_NOT_FOUND));
         bookingMethodMapper.updateBookingMethod(bookingMethod, request);
-        if(bookingMethodRepository.existsByBookingMethodName(request.getBookingMethodName()))
-        {
-            throw new AppException(ErrorCode.DUPLICATED_KEY);
-        }
         return bookingMethodMapper.toBookingMethodResponse(bookingMethodRepository.save(bookingMethod));
     }
 
