@@ -16,9 +16,9 @@ public class BookingMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Booking_Method_ID")
-    Integer bookingMethodId;
+    Long bookingMethodId;
 
-    @Column(name = "Booking_Method")
+    @Column(name = "Booking_Method", unique = true)
     String bookingMethodName;
 
     @Column(name = "Description")

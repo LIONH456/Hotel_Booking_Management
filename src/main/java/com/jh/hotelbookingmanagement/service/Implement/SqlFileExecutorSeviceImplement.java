@@ -6,7 +6,9 @@ import com.jh.hotelbookingmanagement.service.SqlFileExecutorService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +22,25 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Slf4j
 public class SqlFileExecutorSeviceImplement implements SqlFileExecutorService {
+    @NonFinal
+    @Value("${sql.path}")
+    String STORE_PATH;
+
 
     JdbcTemplate jdbcTemplate;
    /**
      * Executes an SQL file.
      *
-     * @param sqlFilePath the path to the SQL file to execute.
+     * @param fileName the SQL file Name to execute.
      */
     @Override
-    public void executeSqlFile(String sqlFilePath) throws IOException {
-        try(BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath))){
+    public void executeSqlFile(String sqlFileName) throws IOException {
+        String fullpath = STORE_PATH + sqlFileName;
+        try(BufferedReader reader = new BufferedReader(new FileReader(fullpath))){
             String line;
             StringBuilder sql = new StringBuilder();
+
+
 
             while ((line = reader.readLine()) != null) {
                 if(line.startsWith("--"))
@@ -42,12 +51,12 @@ public class SqlFileExecutorSeviceImplement implements SqlFileExecutorService {
                     sql.setLength(0); // Clear the buffer
                 }
             }
-            log.info("SQL file executed successfully: {}", sqlFilePath);
+            log.info("SQL file executed successfully: {}", fullpath);
         }catch (IOException e) {
-            log.error("Error reading SQL file: {}", sqlFilePath, e);
+            log.error("Error reading SQL file: {}", fullpath, e);
             throw new AppException(ErrorCode.FILE_READ_ERROR);
         } catch (Exception e) {
-            log.error("Error executing SQL file: {}", sqlFilePath, e);
+            log.error("Error executing SQL file: {}", fullpath, e);
             throw new AppException(ErrorCode.SQL_EXECUTION_ERROR);
         }
     }

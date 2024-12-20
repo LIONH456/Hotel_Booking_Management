@@ -1,10 +1,12 @@
 package com.jh.hotelbookingmanagement.exception;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.ConstraintViolation;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -92,5 +94,44 @@ public class GlobalExceptionHandler {
         String minValue = String.valueOf(attributes.get(MIN_ATTRIBUTE));
 
         return message.replace("{" + MIN_ATTRIBUTE + "}", minValue);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse> handleDataIntegrityViolation(DataIntegrityViolationException exception) {
+        ErrorCode errorCode = ErrorCode.DUPLICATED_KEY;
+
+        // Extract the conflicting attribute dynamically
+        String conflictingField = extractConflictingField(exception.getMessage());
+
+        // Prepare attributes for message formatting
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("attribute", conflictingField);
+
+        // Format the error message
+        String formattedMessage = errorCode.getFormattedMessage(attributes);
+
+        // Prepare the API response
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setCode(errorCode.getCode());
+        apiResponse.setMessage(formattedMessage);
+
+        return ResponseEntity.status(errorCode.getStatusCode()).body(apiResponse);
+    }
+
+    private static final Map<String, String> ATTRIBUTE_MAP = new HashMap<>() {{
+        put("booking_methods", "booking method");
+        put("booking_status", "booking status");
+        put("payment_types", "payment type");
+        // Add more mappings as needed
+    }};
+
+    private String extractConflictingField(String errorMessage) {
+        // Check for specific keywords in the error message
+        for (Map.Entry<String, String> entry : ATTRIBUTE_MAP.entrySet()) {
+            if (errorMessage.contains(entry.getKey())) {
+                return entry.getValue(); // Return the user-friendly name
+            }
+        }
+        return "attribute"; // Default fallback
     }
 }

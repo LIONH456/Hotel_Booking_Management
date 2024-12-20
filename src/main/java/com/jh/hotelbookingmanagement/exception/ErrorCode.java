@@ -1,9 +1,12 @@
 package com.jh.hotelbookingmanagement.exception;
 
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 
 import lombok.Getter;
+
+import java.util.Map;
 
 @Getter
 public enum ErrorCode {
@@ -21,6 +24,8 @@ public enum ErrorCode {
     BOOKING_NOT_FOUND_BY_USER(1011, "You have not make any booking yet!:(", HttpStatus.NOT_FOUND),
     ROOM_NOT_FOUND(1012, "No rooms found", HttpStatus.NOT_FOUND),
     BRANCH_NOT_FOUND(1013, "No branch found", HttpStatus.NOT_FOUND),
+    BOOKING_METHOD_NOT_FOUND(1014, "No booking method found", HttpStatus.NOT_FOUND),
+    DUPLICATED_KEY(1015, "There is a {attribute} using the same name.", HttpStatus.BAD_REQUEST),
     // Picture-specific error codes
     FILE_NOT_SUPPORTED(2001, "File type is not supported", HttpStatus.BAD_REQUEST),
     FILE_IS_EMPTY(2002, "File cannot be empty", HttpStatus.BAD_REQUEST),
@@ -44,4 +49,15 @@ public enum ErrorCode {
     private final int code;
     private final String message;
     private final HttpStatusCode statusCode;
+
+    public String getFormattedMessage(Map<String, Object> attributes) {
+        String formattedMessage = this.message;
+        if (attributes != null) {
+            for (Map.Entry<String, Object> entry : attributes.entrySet()) {
+                formattedMessage = formattedMessage.replace("{" + entry.getKey() + "}", String.valueOf(entry.getValue()));
+            }
+        }
+        return formattedMessage;
+    }
+
 }

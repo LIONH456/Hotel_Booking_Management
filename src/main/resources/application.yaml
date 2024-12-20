@@ -22,3 +22,6 @@ jwt:
 
 picture:
     upload-dir: src/main/resources/static/images
+
+sql:
+  path: src/main/resources/static/SQL Script/

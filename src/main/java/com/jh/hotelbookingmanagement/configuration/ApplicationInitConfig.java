@@ -85,17 +85,17 @@ public class ApplicationInitConfig {
                 log.warn("ROOM and BRANCH have been initial added into picture category");
             }
             if(bookingMethodRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("src/main/resources/Static/SQL Script/InsertBookingMethod.sql");
+                sqlFileExecutorService.executeSqlFile("InsertBookingMethod.sql");
                 log.warn("Initialize Booking Method");
             }
 
             if(bookingStatusRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("src/main/resources/Static/SQL Script/InsertBookingStatuses.sql");
+                sqlFileExecutorService.executeSqlFile("InsertBookingStatuses.sql");
                 log.warn("Initialize Booking Status");
             }
 
             if(paymentTypeRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("src/main/resources/Static/SQL Script/InsertPaymentType.sql");
+                sqlFileExecutorService.executeSqlFile("InsertPaymentType.sql");
                 log.warn("Initialize Payment Type");
             }
             log.info("Application initialization completed .....");
