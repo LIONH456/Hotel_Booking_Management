@@ -19,9 +19,9 @@ public class RoomItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Item_ID")
-    Integer itemId;
+    Long itemId;
 
-    @Column(name = "Item_Name")
+    @Column(name = "Item_Name", unique = true, nullable = false)
     String itemName;
 
     @Column(name = "Description")
@@ -33,6 +33,6 @@ public class RoomItem {
     @Column(name = "Stock")
     int stock;
 
-    @Column(name = "Room_ID")
-    String roomId;
+    @Column(name="Is_Served")
+    boolean active;
 }

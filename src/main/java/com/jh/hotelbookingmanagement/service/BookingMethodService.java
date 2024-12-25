@@ -11,8 +11,8 @@ public interface BookingMethodService {
     
     List<BookingMethodResponse> getAllBookingMethod();
 
-    BookingMethodResponse updateBookingMethod(Long BookingMethodId, BookingMethodRequest request);
+    BookingMethodResponse updateBookingMethod(Long bookingMethodId, BookingMethodRequest request);
 
-    void deleteBookingMethod(Long BookingMethodId);
+    void deleteBookingMethod(Long bookingMethodId);
     
 }

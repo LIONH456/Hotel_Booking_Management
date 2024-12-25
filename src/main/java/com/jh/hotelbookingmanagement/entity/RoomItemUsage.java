@@ -30,4 +30,7 @@ public class RoomItemUsage {
 
     @Column(name = "Charge")
     double charge;
+
+    @Column(name="Room_ID")
+    String roomId;
 }

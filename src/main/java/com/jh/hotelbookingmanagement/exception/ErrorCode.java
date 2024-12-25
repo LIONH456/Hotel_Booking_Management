@@ -26,6 +26,7 @@ public enum ErrorCode {
     BRANCH_NOT_FOUND(1013, "No branch found", HttpStatus.NOT_FOUND),
     BOOKING_METHOD_NOT_FOUND(1014, "No booking method found", HttpStatus.NOT_FOUND),
     DUPLICATED_KEY(1015, "There is a {attribute} using the same name.", HttpStatus.BAD_REQUEST),
+    ROOM_ITEM_NOT_FOUND(1015, "Item not Found", HttpStatus.NOT_FOUND),
     // Picture-specific error codes
     FILE_NOT_SUPPORTED(2001, "File type is not supported", HttpStatus.BAD_REQUEST),
     FILE_IS_EMPTY(2002, "File cannot be empty", HttpStatus.BAD_REQUEST),
@@ -37,7 +38,8 @@ public enum ErrorCode {
     INVALID_PICTURE_CATEGORY(2008, "Invalid Picture Category", HttpStatus.BAD_REQUEST),
     // Sql File
     FILE_READ_ERROR(1101, "Error reading SQL file", HttpStatus.BAD_REQUEST),
-    SQL_EXECUTION_ERROR(1102, "Error executing SQL file", HttpStatus.INTERNAL_SERVER_ERROR);
+    SQL_EXECUTION_ERROR(1102, "Error executing SQL file", HttpStatus.INTERNAL_SERVER_ERROR),
+
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
