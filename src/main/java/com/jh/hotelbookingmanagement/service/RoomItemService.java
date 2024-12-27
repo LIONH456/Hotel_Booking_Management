@@ -15,5 +15,5 @@ public interface RoomItemService {
 
     void deleteRoomItem(Long roomItemId);
 
-    public RoomItemResponse getroomItem(Long roomItemId);
+    public RoomItemResponse getRoomItem(Long roomItemId);
 }

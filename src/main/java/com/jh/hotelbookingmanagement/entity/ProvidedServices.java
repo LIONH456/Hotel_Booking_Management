@@ -14,11 +14,11 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "Services")
-public class Services {
+public class ProvidedServices {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Service_ID")
-    int serviceId;
+    Long serviceId;
 
     @Column(name = "Service_Name")
     String serviceName;

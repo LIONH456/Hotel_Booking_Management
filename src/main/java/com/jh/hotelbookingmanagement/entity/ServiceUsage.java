@@ -27,7 +27,7 @@ public class ServiceUsage {
 
     @ManyToOne
     @JoinColumn(name="Service_ID", referencedColumnName = "Service_ID")
-    Services serviceId;
+    ProvidedServices serviceId;
 
     @Column(name = "Date_Used")
     Date serviceUsedDate;

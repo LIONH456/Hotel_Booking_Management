@@ -40,21 +40,21 @@ public class RoomItemController {
 //        return bookingService.getBooking(bookingId);
 //    }
 
-    @PutMapping("/{RromItemId}")
-    RoomItemResponse updateRoomItem(@PathVariable Long RromItemId, @RequestBody RoomItemRequest request) {
-        return roomItemService.updateRoomItem(RromItemId, request);
+    @PutMapping("/{roomItemId}")
+    RoomItemResponse updateRoomItem(@PathVariable Long roomItemId, @RequestBody RoomItemRequest request) {
+        return roomItemService.updateRoomItem(roomItemId, request);
     }
 //
-    @DeleteMapping("/{RromItemId}")
-    ApiResponse<String> deleteRoomItem(@PathVariable Long RromItemId) {
-        roomItemService.deleteRoomItem(RromItemId);
+    @DeleteMapping("/{roomItemId}")
+    ApiResponse<String> deleteRoomItem(@PathVariable Long roomItemId) {
+        roomItemService.deleteRoomItem(roomItemId);
         return ApiResponse.<String>builder().result("This room item has been Deleted!").build();
     }
 
     @GetMapping("/{roomItemId}")
     ApiResponse<RoomItemResponse> getBooking(@PathVariable("roomItemId") Long roomItemId) {
         return ApiResponse.<RoomItemResponse>builder()
-                .result(roomItemService.getroomItem(roomItemId))
+                .result(roomItemService.getRoomItem(roomItemId))
                 .build();
     }
 }

@@ -53,7 +53,7 @@ public class RoomItemServiceImplement implements RoomItemService {
     }
 
     @Override
-    public RoomItemResponse getroomItem(Long roomItemId) {
+    public RoomItemResponse getRoomItem(Long roomItemId) {
         return roomItemMapper.toRoomItemResponse(roomItemRepository.findById(roomItemId).orElseThrow(()->new AppException(ErrorCode.ROOM_ITEM_NOT_FOUND)));
     }
 }
