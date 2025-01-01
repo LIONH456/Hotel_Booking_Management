@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class BookingResponse {
     String bookingId;
-    BookingMethod bookingMethodId;
+    BookingMethod bookingMethod;
     Date bookedDate;
     int roomCount;
     User bookedBy;

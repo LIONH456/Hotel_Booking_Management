@@ -2,6 +2,8 @@ package com.jh.hotelbookingmanagement.service.Implement;
 
 import java.util.List;
 
+import com.jh.hotelbookingmanagement.entity.BookingMethod;
+import com.jh.hotelbookingmanagement.repository.BookingMethodRepository;
 import com.jh.hotelbookingmanagement.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -33,11 +35,13 @@ public class BookingService {
 
     UserRepository userRepository;
 
+    BookingMethodRepository bookingMethodRepository;
+
     public BookingResponse createRequest(BookingCreationRequest request) {
 
         Booking booking = bookingMapper.toBooking(request);
         booking.setBookedBy(userRepository.findById(request.getBookedBy()).orElseThrow(()->new AppException(ErrorCode.USER_NOT_EXISTED)));
-        log.info(booking.getBookedBy() + "");
+        booking.setBookingMethod(bookingMethodRepository.findById(request.getBookingMethodId()).orElseThrow(()->new AppException(ErrorCode.BOOKING_METHOD_NOT_FOUND)));
 //        List<String> bookingStatuses = bookingRepository.isActive(booking.getBookingId());
 //        booking.setActive(true);
 //        log.info("this works");

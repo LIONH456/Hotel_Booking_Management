@@ -47,4 +47,10 @@ public class BookingDetail {
     @ManyToOne
     @JoinColumn(name = "Booking_Status_ID", referencedColumnName = "Booking_Status_ID")
     BookingStatus bookingStatusId;
+
+    @Column(name= "Item_Charge")
+    double itemCharge;
+//
+//    @Column(name="Service_Charge")
+//    double serviceCharge;
 }

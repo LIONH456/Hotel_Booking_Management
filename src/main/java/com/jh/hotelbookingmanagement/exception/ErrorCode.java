@@ -28,6 +28,8 @@ public enum ErrorCode {
     DUPLICATED_KEY(1015, "There is a {attribute} using the same name.", HttpStatus.BAD_REQUEST),
     ROOM_ITEM_NOT_FOUND(1015, "Item not Found", HttpStatus.NOT_FOUND),
     SERVICE_NOT_FOUND(1016, "Services not Found", HttpStatus.NOT_FOUND),
+    INSUFFICIENT_STOCK(1017, "Not Enough Stock", HttpStatus.BAD_REQUEST),
+    INSUFFICIENT_QUANTITY(1018, "Quantity must be at least 1", HttpStatus.BAD_REQUEST),
     // Picture-specific error codes
     FILE_NOT_SUPPORTED(2001, "File type is not supported", HttpStatus.BAD_REQUEST),
     FILE_IS_EMPTY(2002, "File cannot be empty", HttpStatus.BAD_REQUEST),

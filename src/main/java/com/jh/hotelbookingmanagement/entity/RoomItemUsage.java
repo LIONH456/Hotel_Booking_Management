@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.entity;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,12 +19,13 @@ public class RoomItemUsage {
     @Column(name = "Item_Usage_ID")
     String itemUsageId;
 
-    @Column(name = "Booking_ID")
-    String bookingId;
+    @ManyToOne
+    @JoinColumn(name = "Booking_Detail_ID", referencedColumnName = "Booking_Detail_ID", nullable = false)
+    BookingDetail bookingDetail;
 
     @ManyToOne
-    @JoinColumn(name="Item_ID", referencedColumnName = "Item_ID")
-    RoomItem itemId;
+    @JoinColumn(name="Item_ID", referencedColumnName = "Item_ID", nullable = false)
+    RoomItem item;
 
     @Column(name = "Quantity")
     int quantity;

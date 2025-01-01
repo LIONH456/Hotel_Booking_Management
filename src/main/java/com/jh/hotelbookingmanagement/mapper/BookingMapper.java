@@ -14,8 +14,10 @@ import com.jh.hotelbookingmanagement.entity.Booking;
 @Mapper(componentModel = "spring")
 public interface BookingMapper {
     @Mapping(target = "bookedBy", ignore = true)
+    @Mapping(target = "bookingMethod", ignore = true)
     Booking toBooking(BookingCreationRequest request);
 
+    @Mapping(target = "bookingMethod", source = "bookingMethod")
     BookingResponse toBookingResponse(Booking booking);
 
     List<BookingResponse> toBookingResponse(List<Booking> bookings);

@@ -15,7 +15,7 @@ import org.mapstruct.Mapping;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingCreationRequest {
-    BookingMethod bookingMethodId;
+    Long bookingMethodId;
     Date bookedDate;
     int roomCount;
     String bookedBy;

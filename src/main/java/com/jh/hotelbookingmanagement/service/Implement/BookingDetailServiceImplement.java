@@ -37,6 +37,7 @@ public class BookingDetailServiceImplement implements BookingDetailService {
     public BookingDetailResponse createBookingDetail(BookingDetailRequest request) {
         BookingDetail bookingDetail = bookingDetailsMapper.toBookingDetail(request);
 
+        bookingDetail.setItemCharge(0);
         bookingDetail.setRoom(roomRepository.findById(request.getRoomId()).orElseThrow(()-> new AppException(ErrorCode.ROOM_NOT_FOUND)));
 
         bookingDetail.setBooking(bookingRepository.findById(request.getBookingId()).orElseThrow(()-> new AppException(ErrorCode.BOOKING_NOT_FOUND)));

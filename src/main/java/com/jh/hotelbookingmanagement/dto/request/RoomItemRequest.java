@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.dto.request;
 
 
+import jakarta.validation.constraints.Min;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,6 +14,7 @@ public class RoomItemRequest {
         String itemName;
         String description;
         double price;
+        @Min(value = 1, message = "INSUFFICIENT_STOCK")
         int stock;
         boolean active;
 }

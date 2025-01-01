@@ -21,7 +21,6 @@ public interface BookingDetailsMapper {
 
     @Mapping(target = "bookingId", source = "booking.bookingId")
     @Mapping(target = "roomNumber", source = "room.roomNumber")
-
     @Mapping(target = "branchId", source = "room.branch.branchId")
     BookingDetailResponse toBookingDetailResponse(BookingDetail bookingDetail);
 

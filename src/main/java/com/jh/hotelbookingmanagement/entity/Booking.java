@@ -25,7 +25,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "Booking_Method_ID", referencedColumnName = "Booking_Method_ID")
-    BookingMethod bookingMethodId;
+    BookingMethod bookingMethod;
 
     @Column(name = "Booked_Date")
     Date bookedDate;
