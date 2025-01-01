@@ -22,12 +22,13 @@ public class ServiceUsage {
     @Column(name = "Service_Usage_ID")
     String serviceUsageId;
 
-    @Column(name = "Booking_ID")
-    String bookingId;
+    @ManyToOne
+    @JoinColumn(name = "Booking_Detail_ID", referencedColumnName = "Booking_Detail_ID", nullable = false)
+    BookingDetail bookingDetail;
 
     @ManyToOne
     @JoinColumn(name="Service_ID", referencedColumnName = "Service_ID")
-    ProvidedServices serviceId;
+    ProvidedServices service;
 
     @Column(name = "Date_Used")
     Date serviceUsedDate;
