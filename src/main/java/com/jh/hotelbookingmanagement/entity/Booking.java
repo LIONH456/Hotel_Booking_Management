@@ -3,6 +3,9 @@ package com.jh.hotelbookingmanagement.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
 import lombok.AccessLevel;
@@ -39,4 +42,13 @@ public class Booking {
 
     @Column(name = "Active")
     boolean active;
+
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<BookingDetail> bookingDetails;
+
+//    @OneToMany
+//    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
+//    List<BookingDetail> bookingDetails;
+
 }

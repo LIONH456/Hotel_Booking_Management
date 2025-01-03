@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.service.Implement;
 
 import com.jh.hotelbookingmanagement.dto.request.ServiceUsageRequest;
 import com.jh.hotelbookingmanagement.dto.response.ServiceUsageResponse;
+import com.jh.hotelbookingmanagement.entity.BookingDetail;
 import com.jh.hotelbookingmanagement.entity.ServiceUsage;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
@@ -33,13 +34,16 @@ public class ServiceUsageServiceImplement implements ServiceUsageService {
     @Override
     public ServiceUsageResponse createServiceUsage(ServiceUsageRequest request) {
         ServiceUsage serviceUsage = serviceUsageMapper.toServiceUsage(request);
-        serviceUsage.setBookingDetail(bookingDetailRepository.findById(request.getBookingDetailId()).orElseThrow(()->new AppException(ErrorCode.BOOKING_NOT_FOUND)));
+        BookingDetail bookingDetail = bookingDetailRepository.findById(request.getBookingDetailId()).orElseThrow(()->new AppException(ErrorCode.BOOKING_NOT_FOUND));
+        serviceUsage.setBookingDetail(bookingDetail);
         serviceUsage.setServiceCharge(request.getQuantity() * serviceUsageRepository.getUnitPriceByServiceId(request.getServiceId()));
         serviceUsage.setService(providedServicesRepository.findById(request.getServiceId()).orElseThrow(()->new AppException(ErrorCode.SERVICE_NOT_FOUND)));
 
         serviceUsage = serviceUsageRepository.save(serviceUsage);
 
         serviceUsageRepository.updateServiceCharge(request.getBookingDetailId());
+        bookingDetail.setTotalAmount(bookingDetail.getRoomCharge()+bookingDetail.getItemCharge()+bookingDetail.getServiceCharge());
+        bookingDetailRepository.save(bookingDetail);
         return serviceUsageMapper.toServiceUsageResponse(serviceUsage);
     }
 

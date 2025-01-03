@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import lombok.*;
@@ -21,8 +22,9 @@ public class BookingDetail {
     String bookingDetailId;
 
     @ManyToOne
-    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
-    Booking booking;
+    @JoinColumn(name = "booking_id", nullable = false)
+    @JsonBackReference
+    private Booking booking;
 
     @ManyToOne
     @JoinColumn(name="Room_ID", referencedColumnName = "Room_ID")
@@ -41,16 +43,18 @@ public class BookingDetail {
     int child;
 
     @ManyToOne
-    @JoinColumn(name = "Promotion_ID", referencedColumnName = "Promotion_ID")
-    Promotion promotion;
-
-    @ManyToOne
     @JoinColumn(name = "Booking_Status_ID", referencedColumnName = "Booking_Status_ID")
     BookingStatus bookingStatusId;
 
+    @Column(name="Total_Room_Charge")
+    double roomCharge;
+
     @Column(name= "Item_Charge")
     double itemCharge;
-//
-//    @Column(name="Service_Charge")
-//    double serviceCharge;
+
+    @Column(name="Service_Charge")
+    double serviceCharge;
+
+    @Column(name="Total_Amount")
+    double totalAmount;
 }

@@ -25,3 +25,6 @@ picture:
 
 sql:
   path: src/main/resources/static/SQL Script/
+
+invoice:
+  tax: 10

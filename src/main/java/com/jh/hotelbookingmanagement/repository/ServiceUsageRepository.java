@@ -16,7 +16,6 @@ public interface ServiceUsageRepository extends JpaRepository<ServiceUsage, Stri
 
     // Update the service charge in booking detail
     @Modifying
-    @Query(value = "UPDATE booking_details SET service_charge = (SELECT SUM(charge) FROM service_usage WHERE booking_detail_id = :bookingDetailId ) WHERE booking_detail_id = :bookingDetailId", nativeQuery = true)
+    @Query(value = "UPDATE booking_details SET service_charge = (SELECT SUM(charge) FROM service_usage WHERE booking_detail_id = :bookingDetailId), total_amount = total_room_charge + item_charge + service_charge WHERE booking_detail_id = :bookingDetailId", nativeQuery = true)
     void updateServiceCharge(@Param("bookingDetailId") String bookingDetailId);
-
 }

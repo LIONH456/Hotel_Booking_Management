@@ -22,7 +22,6 @@ public interface RoomItemUsageRepository extends JpaRepository<RoomItemUsage, St
     void updateStock(@Param("stockChange") int stockChange, @Param("itemId") Long itemId);
 
     @Modifying
-    @Query(value = "UPDATE booking_details SET item_charge = (SELECT SUM(charge) FROM room_item_usage WHERE booking_detail_id = :bookingDetailId ) WHERE booking_detail_id = :bookingDetailId", nativeQuery = true)
+    @Query(value = "UPDATE booking_details SET item_charge = (SELECT SUM(charge) FROM room_item_usage WHERE booking_detail_id = :bookingDetailId), total_amount = total_room_charge + item_charge + service_charge WHERE booking_detail_id = :bookingDetailId", nativeQuery = true)
     void updateItemCharge(@Param("bookingDetailId") String bookingDetailId);
-
 }

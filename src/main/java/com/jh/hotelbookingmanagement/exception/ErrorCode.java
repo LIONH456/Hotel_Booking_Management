@@ -30,6 +30,7 @@ public enum ErrorCode {
     SERVICE_NOT_FOUND(1016, "Services not Found", HttpStatus.NOT_FOUND),
     INSUFFICIENT_STOCK(1017, "Not Enough Stock", HttpStatus.BAD_REQUEST),
     INSUFFICIENT_QUANTITY(1018, "Quantity must be at least 1", HttpStatus.BAD_REQUEST),
+    INVALID_DATE_RANGE(1019, "check out date must after check in date", HttpStatus.BAD_REQUEST),
     // Picture-specific error codes
     FILE_NOT_SUPPORTED(2001, "File type is not supported", HttpStatus.BAD_REQUEST),
     FILE_IS_EMPTY(2002, "File cannot be empty", HttpStatus.BAD_REQUEST),

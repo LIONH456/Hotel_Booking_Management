@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.service.Implement;
 
 import com.jh.hotelbookingmanagement.dto.request.RoomItemUsageRequest;
 import com.jh.hotelbookingmanagement.dto.response.RoomItemUsageResponse;
+import com.jh.hotelbookingmanagement.entity.BookingDetail;
 import com.jh.hotelbookingmanagement.entity.RoomItemUsage;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
@@ -32,12 +33,14 @@ public class RoomItemUsageServiceImplement implements RoomItemUsageService {
 
     @Override
     public RoomItemUsageResponse createRoomItemUsage(RoomItemUsageRequest request) {
+        BookingDetail bookingDetail = bookingDetailRepository.findById(request.getBookingDetailId()).orElseThrow(()->new AppException(ErrorCode.BOOKING_NOT_FOUND));
         RoomItemUsage roomItemUsage = RoomItemUsage.builder()
                 .quantity(request.getQuantity())
                 .charge(request.getQuantity() * roomItemUsageRepository.getUnitPriceByItemId(request.getItemId()))
-                .bookingDetail(bookingDetailRepository.findById(request.getBookingDetailId()).orElseThrow(() -> new AppException(ErrorCode.BOOKING_NOT_FOUND)))
+                .bookingDetail(bookingDetail)
                 .item(roomItemRepository.findById(request.getItemId()).orElseThrow(() -> new AppException(ErrorCode.ROOM_ITEM_NOT_FOUND)))
                 .build();
+
 
         // Check stock
         if (roomItemUsageRepository.getStockByItemId(request.getItemId()) < request.getQuantity()) {
