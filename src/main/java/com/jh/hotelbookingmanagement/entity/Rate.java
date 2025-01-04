@@ -18,12 +18,11 @@ public class Rate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Rate_ID")
-    int rateId;
+    Long rateId;
 
     @ManyToOne
     @JoinColumn(name = "Room_ID", referencedColumnName = "Room_ID")
     Room room;
-
 
     @ManyToOne
     @JoinColumn(name = "Rated_By", referencedColumnName = "User_ID")

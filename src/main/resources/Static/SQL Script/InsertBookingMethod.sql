@@ -1,4 +1,4 @@
-
+-- Insert Sample Booking Method
 
 INSERT INTO booking_methods (Booking_Method, Description, Active) VALUES
 ('Online Booking', 'Booking through the website or mobile app', TRUE),

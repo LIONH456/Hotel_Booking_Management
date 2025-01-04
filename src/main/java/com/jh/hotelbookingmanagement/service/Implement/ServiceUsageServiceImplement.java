@@ -58,6 +58,8 @@ public class ServiceUsageServiceImplement implements ServiceUsageService {
         ServiceUsage serviceUsage = serviceUsageRepository.findById(serviceUsageId)
                 .orElseThrow(()->new AppException(ErrorCode.BOOKING_METHOD_NOT_FOUND));
         serviceUsageMapper.updateServiceUsage(serviceUsage, request);
+        serviceUsageRepository.save(serviceUsage);
+        serviceUsageRepository.updateServiceCharge(request.getBookingDetailId());
         return serviceUsageMapper.toServiceUsageResponse(serviceUsageRepository.save(serviceUsage));
     }
 

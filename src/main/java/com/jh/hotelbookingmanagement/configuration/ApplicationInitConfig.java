@@ -45,7 +45,8 @@ public class ApplicationInitConfig {
             havingValue = "com.mysql.cj.jdbc.Driver")
     ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, PictureCategoryRepository pictureCategoryRepository, BookingMethodRepository bookingMethodRepository,
                                         BookingStatusRepository bookingStatusRepository,
-                                        PaymentTypeRepository paymentTypeRepository) {
+                                        PaymentTypeRepository paymentTypeRepository,
+                                        PromotionRepository promotionRepository) {
         log.info("Initializing application.....");
         return args -> {
             if (userRepository.findByUsername(ADMIN_USER_NAME).isEmpty()) {
@@ -97,6 +98,11 @@ public class ApplicationInitConfig {
             if(paymentTypeRepository.findAll().isEmpty()){
                 sqlFileExecutorService.executeSqlFile("InsertPaymentType.sql");
                 log.warn("Initialize Payment Type");
+            }
+
+            if(promotionRepository.findAll().isEmpty()){
+                sqlFileExecutorService.executeSqlFile("InsertPromotion.sql");
+                log.warn("Initialize Promotion");
             }
             log.info("Application initialization completed .....");
             
