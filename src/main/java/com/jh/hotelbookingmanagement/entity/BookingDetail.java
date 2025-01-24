@@ -1,5 +1,6 @@
 package com.jh.hotelbookingmanagement.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -14,47 +15,42 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Entity
-@Table(name = "Booking_Details")
+@Table(name = "booking_details")
 public class BookingDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "Booking_Detail_ID")
-    String bookingDetailId;
+    @Column(name = "booking_detail_id")
+    private String bookingDetailId;
+    
+    private Integer adult;
+    private Integer child;
+    
+    @Column(name = "check_in_date")
+    private LocalDateTime checkInDate;
+    
+    @Column(name = "check_out_date")
+    private LocalDateTime checkOutDate;
+    
+    @Column(name = "item_charge")
+    private Double itemCharge;
+    
+    @Column(name = "total_room_charge")
+    private Double totalRoomCharge;
+    
+    @Column(name = "service_charge")
+    private Double serviceCharge;
+    
+    @Column(name = "total_amount")
+    private Double totalAmount;
 
-    @ManyToOne
-    @JoinColumn(name = "booking_id", nullable = false)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id", referencedColumnName = "booking_id")
     private Booking booking;
 
-    @ManyToOne
-    @JoinColumn(name="Room_ID", referencedColumnName = "Room_ID")
-    Room room;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_status_id", referencedColumnName = "booking_status_id")
+    private BookingStatus bookingStatus;
 
-    @Column(name = "Check_In_Date")
-    Date checkInDate;
-
-    @Column(name = "Check_Out_Date")
-    Date checkOutDate;
-
-    @Column(name = "Adult")
-    int adult;
-
-    @Column(name = "Child")
-    int child;
-
-    @ManyToOne
-    @JoinColumn(name = "Booking_Status_ID", referencedColumnName = "Booking_Status_ID")
-    BookingStatus bookingStatusId;
-
-    @Column(name="Total_Room_Charge")
-    double roomCharge;
-
-    @Column(name= "Item_Charge")
-    double itemCharge;
-
-    @Column(name="Service_Charge")
-    double serviceCharge;
-
-    @Column(name="Total_Amount")
-    double totalAmount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
+    private Room room;
 }

@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.repository;
 
 import java.util.List;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -42,18 +43,15 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
     List<Object[]> getMonthlyRevenue();
 
     // Get daily occupancy stats
-    @Query(value = "SELECT " +
-            "DATE(bd.check_in_date) as checkInDate, " +
-            "(SELECT COUNT(*) FROM rooms r) as totalRooms, " +
-            "COUNT(DISTINCT bd.room_id) as occupiedRooms " +
-            "FROM bookings b " +
-            "JOIN booking_details bd ON b.booking_id = bd.booking_id " +
-            "WHERE bd.check_in_date >= :startDate " +
-            "AND bd.check_out_date <= :endDate " +
-            "AND b.active = '1' " +
-            "GROUP BY DATE(bd.check_in_date)",
-            nativeQuery = true)
-    List<Object[]> getDailyOccupancy(@Param("startDate") LocalDateTime startDate,
-                                     @Param("endDate") LocalDateTime endDate);
+    @Query("SELECT new com.jh.hotelbookingmanagement.dto.response.OccupancyStats(" +
+            "CAST(bd.checkInDate AS date) as date, " +
+            "COUNT(DISTINCT bd.room) as occupiedRooms, " +
+            "(SELECT COUNT(r) FROM Room r) as totalRooms, " +
+            "CAST(COUNT(DISTINCT bd.room) AS double) / CAST((SELECT COUNT(r) FROM Room r) AS double) * 100 as occupancyRate) " +
+            "FROM BookingDetail bd " +
+            "WHERE bd.checkInDate >= :startDate " +
+            "GROUP BY CAST(bd.checkInDate AS date) " +
+            "ORDER BY date")
+    List<OccupancyStats> findDailyOccupancy(@Param("startDate") LocalDate startDate);
 
 }

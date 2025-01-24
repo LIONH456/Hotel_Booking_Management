@@ -1,29 +1,30 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
 @Entity
-@Table(name = "Payment_Types")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "payment_types")
 public class PaymentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Payment_Type_ID")
-    Long paymentTypeId;
+    @Column(name="payment_type_id")
+    private Long paymentTypeId;
+    
+    @Column(name = "payment_type", unique = true)
+    private String paymentTypeName;
+    
+    private String description;
+    private Boolean active;
 
-    @Column(name = "Payment_Type", updatable = false, nullable = false, unique = true)
-    String paymentTypeName;
-
-    @Column(name = "Description")
-    String description;
-
-    @Column(name = "Active")
-    boolean active;
+    @OneToMany(mappedBy = "paymentType")
+    private List<Payment> payments;
 }

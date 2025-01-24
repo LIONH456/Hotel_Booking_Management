@@ -1,29 +1,30 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.List;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
 @Entity
-@Table(name = "Booking_Methods")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "booking_methods")
 public class BookingMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Booking_Method_ID")
-    Long bookingMethodId;
+    @Column(name = "booking_method_id")
+    private Long bookingMethodId;
+    
+    @Column(name = "booking_method", unique = true)
+    private String bookingMethodName;
+    
+    private String description;
+    private Boolean active;
 
-    @Column(name = "Booking_Method", unique = true)
-    String bookingMethodName;
-
-    @Column(name = "Description")
-    String description;
-
-    @Column(name = "Active")
-    boolean active;
+    @OneToMany(mappedBy = "bookingMethod")
+    private List<Booking> bookings;
 }

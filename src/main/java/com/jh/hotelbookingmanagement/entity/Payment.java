@@ -1,5 +1,6 @@
 package com.jh.hotelbookingmanagement.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -13,38 +14,38 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 @Table(name = "payments")
+@Builder
 public class Payment {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "Payment_ID")
-    String paymentId;
+    @Column(name = "payment_id")
+    private String paymentId;
+    
+    private Double amount;
+    private Double discount;
+    
+    @Column(name = "item_charges")
+    private Double itemCharges;
+    
+    @Column(name = "service_charges")
+    private Double serviceCharges;
+    
+    private Double total;
+    
+    @Column(name = "total_paid")
+    private Double totalPaid;
+    
+    @Column(name = "paid_date")
+    private LocalDateTime paidDate;
 
-    @ManyToOne
-    @JoinColumn(name="Booking_ID", referencedColumnName = "Booking_ID")
-    Booking booking;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id", referencedColumnName = "booking_id")
+    private Booking booking;
 
-    @OneToOne
-    @JoinColumn(name = "Payment_Type_ID", referencedColumnName = "Payment_Type_ID")
-    PaymentType paymentType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_type_id", referencedColumnName = "payment_type_id")
+    private PaymentType paymentType;
 
-    @Column(name = "Paid_Date")
-    Date paidDate;
-
-    @Column(name = "Service_Charges")
-    double serviceCharges;
-
-    @Column(name="Item_Charges")
-    double itemCharges;
-
-    @Column(name="Discount")
-    double discount;
-
-    @Column(name = "Amount")
-    double amount;
-
-    @Column(name = "Total_Paid")
-    double totalPaid;
-
-    @Column(name="Total")
-    double total;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_status_id", referencedColumnName = "payment_status_id")
+    private PaymentStatus paymentStatus;
 }

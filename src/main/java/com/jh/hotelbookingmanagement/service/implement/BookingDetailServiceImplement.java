@@ -58,11 +58,11 @@ public class BookingDetailServiceImplement implements BookingDetailService {
 
         // Calculate room charge
         double roomCharge = room.getPrice() * numberOfDays;
-        bookingDetail.setRoomCharge(roomCharge);
+        bookingDetail.setTotalRoomCharge(roomCharge);
 
         // Set initial values for item charge and service charge if not provided
-        bookingDetail.setItemCharge(0);
-        bookingDetail.setServiceCharge(0);
+        bookingDetail.setItemCharge(0.0);
+        bookingDetail.setServiceCharge(0.0);
 
         // Calculate total amount
         double totalAmount = roomCharge + bookingDetail.getItemCharge() + bookingDetail.getServiceCharge();

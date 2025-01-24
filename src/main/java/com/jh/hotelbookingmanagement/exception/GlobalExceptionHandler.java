@@ -124,6 +124,7 @@ public class GlobalExceptionHandler {
         put("payment_types", "payment type");
         put("room_item", "room item");
         put("services", "service");
+        put("payment_status", "payment status");
         // Add more mappings as needed
     }};
 

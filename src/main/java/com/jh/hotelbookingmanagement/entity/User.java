@@ -1,7 +1,8 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -16,30 +17,53 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
+@Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name="User_ID")
-    String userId;
+    @Column(name = "user_id")
+    private String userId;
 
     @Column(name = "username", unique = true, columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci")
-    String username;
+    private String username;
 
-    String password;
-    String firstName;
-    LocalDate dob;
-    String lastName;
+    private String password;
 
-    String gender;
-    String address;
-    String email;
-    String phoneNum;
-    String identificationNum;
-    String identificationType;
-    String nationality;
-    String registerType;
-    Date createdDate;
-    Date updatedDate;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    private LocalDate dob;
+
+    private String email;
+
+    @Column(name = "phone_num")
+    private String phoneNum;
+
+    private String address;
+
+    private String gender;
+
+    private String nationality;
+
+    @Column(name = "identification_num")
+    private String identificationNum;
+
+    @Column(name = "identification_type")
+    private String identificationType;
+
+    @Column(name = "register_type")
+    private String registerType;
+
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "updated_date")
+    private LocalDateTime updatedDate;
+
+    @OneToMany(mappedBy = "bookedBy")
+    private List<Booking> bookings;
 
     @ManyToMany
     Set<Role> roles;

@@ -42,7 +42,7 @@ public class ServiceUsageServiceImplement implements ServiceUsageService {
         serviceUsage = serviceUsageRepository.save(serviceUsage);
 
         serviceUsageRepository.updateServiceCharge(request.getBookingDetailId());
-        bookingDetail.setTotalAmount(bookingDetail.getRoomCharge()+bookingDetail.getItemCharge()+bookingDetail.getServiceCharge());
+        bookingDetail.setTotalAmount(bookingDetail.getTotalRoomCharge()+bookingDetail.getItemCharge()+bookingDetail.getServiceCharge());
         bookingDetailRepository.save(bookingDetail);
         return serviceUsageMapper.toServiceUsageResponse(serviceUsage);
     }

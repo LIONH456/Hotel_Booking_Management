@@ -44,6 +44,11 @@ public enum ErrorCode {
     FILE_READ_ERROR(1101, "Error reading SQL file", HttpStatus.BAD_REQUEST),
     SQL_EXECUTION_ERROR(1102, "Error executing SQL file", HttpStatus.INTERNAL_SERVER_ERROR),
 
+    // Cursor
+    PAYMENT_TYPE_NOT_FOUND(1020, "Payment type not found", HttpStatus.NOT_FOUND),
+    PAYMENT_STATUS_NOT_FOUND(1021, "Payment status not found", HttpStatus.NOT_FOUND),
+    PAYMENT_NOT_FOUND(1022, "Payment not found", HttpStatus.NOT_FOUND),
+
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

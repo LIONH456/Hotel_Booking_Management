@@ -1,5 +1,6 @@
 package com.jh.hotelbookingmanagement.entity;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -13,42 +14,41 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.Builder;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Entity
-@Table(name = "Bookings")
+@Table(name = "bookings")
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "Booking_ID")
-    String bookingId;
+    @Column(name = "booking_id")
+    private String bookingId;
+    
+    @Column(name = "booked_date")
+    private LocalDateTime bookedDate;
+    
+    @Column(name = "room_count")
+    private Integer roomCount;
+    
+    @Column(name = "total_amount")
+    private Double totalAmount;
+    
+    private Boolean active;
 
-    @ManyToOne
-    @JoinColumn(name = "Booking_Method_ID", referencedColumnName = "Booking_Method_ID")
-    BookingMethod bookingMethod;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booked_by", referencedColumnName = "user_id")
+    private User bookedBy;
 
-    @Column(name = "Booked_Date")
-    Date bookedDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_method_id", referencedColumnName = "booking_method_id")
+    private BookingMethod bookingMethod;
 
-    @Column(name = "Room_Count")
-    int roomCount;
-
-    @ManyToOne
-    @JoinColumn(name = "Booked_By", referencedColumnName = "User_ID")
-    User bookedBy;
-
-    @Column(name = "Active")
-    boolean active;
-
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<BookingDetail> bookingDetails;
 
-//    @OneToMany
-//    @JoinColumn(name = "Booking_ID", referencedColumnName = "Booking_ID")
-//    List<BookingDetail> bookingDetails;
-
+    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 }

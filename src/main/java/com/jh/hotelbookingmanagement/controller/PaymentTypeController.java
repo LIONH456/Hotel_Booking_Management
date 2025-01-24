@@ -1,58 +1,64 @@
 package com.jh.hotelbookingmanagement.controller;
 
 import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
-
 import com.jh.hotelbookingmanagement.dto.request.PaymentTypeRequest;
 import com.jh.hotelbookingmanagement.dto.response.PaymentTypeResponse;
+import com.jh.hotelbookingmanagement.entity.PaymentType;
 import com.jh.hotelbookingmanagement.service.PaymentTypeService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RestController
+@RequestMapping("/payment-types")
 @RequiredArgsConstructor
-@RequestMapping("/paymentType")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
+@CrossOrigin(origins = "*")
 public class PaymentTypeController {
     PaymentTypeService paymentTypeService;
 
     @PostMapping
-    ApiResponse<PaymentTypeResponse> createBooking(@RequestBody PaymentTypeRequest request) {
+    public ApiResponse<PaymentTypeResponse> createPaymentType(@RequestBody PaymentTypeRequest request) {
         return ApiResponse.<PaymentTypeResponse>builder()
                 .result(paymentTypeService.createPaymentType(request))
                 .build();
     }
 
-    @GetMapping
-    ApiResponse<List<PaymentTypeResponse>> getBookings() {
-        return ApiResponse.<List<PaymentTypeResponse>>builder()
-                .result(paymentTypeService.getAllPaymentType())
+    @GetMapping("/{id}")
+    public ApiResponse<PaymentTypeResponse> getPaymentType(@PathVariable Long id) {
+        return ApiResponse.<PaymentTypeResponse>builder()
+                .result(paymentTypeService.getPaymentTypeById(id))
                 .build();
     }
-//
-//    @GetMapping("/{bookingId}")
-//    BookingResponse getBooking(@PathVariable("bookingId") String bookingId) {
-//        return bookingService.getBooking(bookingId);
-//    }
 
-    @PutMapping("/{paymentTypeId}")
-    PaymentTypeResponse updatePaymentTy(@PathVariable Long paymentTypeId, @RequestBody PaymentTypeRequest request) {
-        return paymentTypeService.updatePaymentType(paymentTypeId, request);
+    @GetMapping
+    public ApiResponse<List<PaymentTypeResponse>> getAllPaymentTypes() {
+        return ApiResponse.<List<PaymentTypeResponse>>builder()
+                .result(paymentTypeService.getAllPaymentTypes())
+                .build();
     }
-//
-    @DeleteMapping("/{paymentTypeId}")
-    ApiResponse<String> deletePaymentType(@PathVariable Long paymentTypeId) {
-        paymentTypeService.deletePaymentType(paymentTypeId);
-        return ApiResponse.<String>builder().result("This payment type has been Deleted!").build();
+
+    @PutMapping("/{id}")
+    public ApiResponse<PaymentTypeResponse> updatePaymentType(
+            @PathVariable Long id,
+            @RequestBody PaymentTypeRequest request) {
+        return ApiResponse.<PaymentTypeResponse>builder()
+                .result(paymentTypeService.updatePaymentType(id, request))
+                .build();
     }
-//
-//    @GetMapping("/usersId:a{userId}")
-//    List<Booking> getBookingsByUser(@PathVariable String userId) {
-//        return bookingService.getBookingsByUser(userId);
-//    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<String> deletePaymentType(@PathVariable Long id) {
+        paymentTypeService.deletePaymentType(id);
+        return ApiResponse.<String>builder()
+                .result("Payment type has been deleted successfully!")
+                .build();
+    }
 }

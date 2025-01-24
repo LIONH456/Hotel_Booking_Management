@@ -7,9 +7,9 @@ import lombok.Data;
 @Builder
 public class DashboardStatsResponse {
     private long totalBookings;
-    private long activeBookings;
     private double totalRevenue;
+    private long totalCustomers;
     private double occupancyRate;
     private long availableRooms;
-    private long totalCustomers;
+    private long totalRooms;
 } 
