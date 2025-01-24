@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.dto.request;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.jh.hotelbookingmanagement.validator.DobConstraint;
@@ -20,6 +21,15 @@ public class UserUpdateRequest {
 
     @DobConstraint(min = 18, message = "INVALID_DOB")
     LocalDate dob;
+    String gender;
+    String address;
+    String email;
+    String phoneNum;
+    String identificationNum;
+    String identificationType;
+    String nationality;
+    String registerType;
+    Date updatedDate;
 
     List<String> roles;
 }

@@ -1,4 +1,4 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import com.jh.hotelbookingmanagement.dto.request.ProvidedServicesRequest;
 import com.jh.hotelbookingmanagement.dto.response.ProvidedServicesResponse;

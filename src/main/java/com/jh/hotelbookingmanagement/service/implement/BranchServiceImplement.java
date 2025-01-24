@@ -1,4 +1,4 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import java.util.List;
 import java.util.stream.Collectors;

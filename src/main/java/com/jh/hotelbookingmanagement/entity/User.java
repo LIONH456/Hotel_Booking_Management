@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.entity;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -28,6 +29,17 @@ public class User {
     String firstName;
     LocalDate dob;
     String lastName;
+
+    String gender;
+    String address;
+    String email;
+    String phoneNum;
+    String identificationNum;
+    String identificationType;
+    String nationality;
+    String registerType;
+    Date createdDate;
+    Date updatedDate;
 
     @ManyToMany
     Set<Role> roles;

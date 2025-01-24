@@ -1,7 +1,6 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import com.jh.hotelbookingmanagement.dto.request.RoomItemRequest;
-import com.jh.hotelbookingmanagement.dto.response.BookingDetailResponse;
 import com.jh.hotelbookingmanagement.dto.response.RoomItemResponse;
 import com.jh.hotelbookingmanagement.entity.RoomItem;
 import com.jh.hotelbookingmanagement.exception.AppException;

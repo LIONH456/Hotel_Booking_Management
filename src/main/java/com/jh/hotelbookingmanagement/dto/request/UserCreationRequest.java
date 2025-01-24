@@ -37,5 +37,5 @@ public class UserCreationRequest {
     String nationality;
     String registerType;
     Date createdDate;
-    Date updatedDate;
+
 }

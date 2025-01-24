@@ -1,8 +1,7 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import com.jh.hotelbookingmanagement.dto.request.BookingMethodRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingMethodResponse;
-import com.jh.hotelbookingmanagement.entity.Booking;
 import com.jh.hotelbookingmanagement.entity.BookingMethod;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;

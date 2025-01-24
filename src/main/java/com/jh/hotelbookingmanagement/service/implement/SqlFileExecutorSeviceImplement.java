@@ -1,4 +1,4 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 

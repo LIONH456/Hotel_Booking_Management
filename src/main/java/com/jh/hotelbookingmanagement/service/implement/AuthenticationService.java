@@ -1,4 +1,4 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import java.text.ParseException;
 import java.time.Instant;

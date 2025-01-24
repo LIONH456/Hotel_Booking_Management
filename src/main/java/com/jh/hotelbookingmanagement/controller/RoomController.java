@@ -9,7 +9,7 @@ import com.jh.hotelbookingmanagement.dto.request.ApiResponse;
 import com.jh.hotelbookingmanagement.dto.request.RoomCreationRequest;
 import com.jh.hotelbookingmanagement.dto.request.RoomUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.RoomResponse;
-import com.jh.hotelbookingmanagement.service.Implement.RoomService;
+import com.jh.hotelbookingmanagement.service.implement.RoomService;
 
 import lombok.AccessLevel;
 import lombok.Builder;

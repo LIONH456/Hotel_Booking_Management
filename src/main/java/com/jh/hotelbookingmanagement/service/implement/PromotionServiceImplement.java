@@ -1,4 +1,4 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import com.jh.hotelbookingmanagement.dto.request.PromotionRequest;
 import com.jh.hotelbookingmanagement.dto.response.PromotionResponse;

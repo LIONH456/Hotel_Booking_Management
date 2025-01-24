@@ -1,8 +1,7 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import java.util.List;
 
-import com.jh.hotelbookingmanagement.entity.BookingMethod;
 import com.jh.hotelbookingmanagement.repository.*;
 import org.springframework.stereotype.Service;
 

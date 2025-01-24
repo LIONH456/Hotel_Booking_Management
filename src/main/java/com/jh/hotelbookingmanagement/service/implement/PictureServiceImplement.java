@@ -1,4 +1,4 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
 import com.jh.hotelbookingmanagement.dto.response.PictureResponse;
 import com.jh.hotelbookingmanagement.entity.Picture;
@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.apache.commons.lang3.EnumUtils;
 
 import java.io.IOException;
 import java.nio.file.Files;

@@ -9,7 +9,7 @@ import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
 import com.jh.hotelbookingmanagement.dto.request.BookingUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingResponse;
 import com.jh.hotelbookingmanagement.entity.Booking;
-import com.jh.hotelbookingmanagement.service.Implement.BookingService;
+import com.jh.hotelbookingmanagement.service.implement.BookingService;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

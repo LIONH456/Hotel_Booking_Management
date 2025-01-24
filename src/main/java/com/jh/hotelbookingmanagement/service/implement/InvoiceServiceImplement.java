@@ -1,19 +1,11 @@
-package com.jh.hotelbookingmanagement.service.Implement;
+package com.jh.hotelbookingmanagement.service.implement;
 
-import com.jh.hotelbookingmanagement.constant.PredefinedRole;
 import com.jh.hotelbookingmanagement.dto.request.InvoiceRequest;
-import com.jh.hotelbookingmanagement.dto.request.UserCreationRequest;
-import com.jh.hotelbookingmanagement.dto.request.UserUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.InvoiceResponse;
-import com.jh.hotelbookingmanagement.dto.response.UserResponse;
 import com.jh.hotelbookingmanagement.entity.Invoice;
-import com.jh.hotelbookingmanagement.entity.Role;
-import com.jh.hotelbookingmanagement.entity.ServiceUsage;
-import com.jh.hotelbookingmanagement.entity.User;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
 import com.jh.hotelbookingmanagement.mapper.InvoiceMapper;
-import com.jh.hotelbookingmanagement.mapper.UserMapper;
 import com.jh.hotelbookingmanagement.repository.*;
 import com.jh.hotelbookingmanagement.service.InvoiceService;
 import lombok.AccessLevel;
@@ -22,15 +14,9 @@ import lombok.experimental.FieldDefaults;
 import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
