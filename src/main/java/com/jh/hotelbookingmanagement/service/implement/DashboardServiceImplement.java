@@ -53,7 +53,7 @@ public class DashboardServiceImplement {
     }
 
     public List<BookingResponse> getRecentBookings() {
-        return bookingRepository.findLatestBookings()
+        return bookingRepository.findRecentBookings(PageRequest.of(0, 10))
                 .stream()
                 .map(bookingMapper::toBookingResponse)
                 .collect(Collectors.toList());

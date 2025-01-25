@@ -3,6 +3,7 @@ package com.jh.hotelbookingmanagement.entity;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -15,13 +16,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "bookings")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Booking {
     @Id
     @Column(name = "booking_id")
@@ -47,7 +51,8 @@ public class Booking {
     private BookingMethod bookingMethod;
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
-    private List<BookingDetail> bookingDetails;
+    @JsonManagedReference
+    private Set<BookingDetail> bookingDetails;
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL)
     private List<Payment> payments;

@@ -42,8 +42,9 @@ public class BookingDetail {
     @Column(name = "total_amount")
     private Double totalAmount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id", referencedColumnName = "booking_id")
+    @ManyToOne
+    @JoinColumn(name = "booking_id")
+    @JsonBackReference
     private Booking booking;
 
     @ManyToOne(fetch = FetchType.LAZY)

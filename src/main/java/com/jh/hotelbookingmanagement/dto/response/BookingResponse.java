@@ -1,7 +1,8 @@
 package com.jh.hotelbookingmanagement.dto.response;
 
-import java.util.Date;
-import java.util.List;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Set;
 
 import com.jh.hotelbookingmanagement.entity.BookingDetail;
 import com.jh.hotelbookingmanagement.entity.User;
@@ -20,10 +21,11 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class BookingResponse {
     String bookingId;
-    BookingMethod bookingMethod;
-    Date bookedDate;
-    int roomCount;
-    User bookedBy;
-    List<BookingDetail> bookingDetails;
-    boolean active;
+    LocalDateTime bookedDate;
+    Integer roomCount;
+    BigDecimal totalAmount;
+    String bookingMethodName;
+    String bookedByUsername;
+    Set<BookingDetailResponse> bookingDetails;
 }
+

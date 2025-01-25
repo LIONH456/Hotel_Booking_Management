@@ -118,9 +118,10 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
 
     @Query("SELECT DISTINCT b FROM Booking b " +
            "LEFT JOIN FETCH b.bookingDetails bd " +
-           "LEFT JOIN FETCH b.bookingMethod " +
-           "LEFT JOIN FETCH b.bookedBy " +
-           "LEFT JOIN FETCH bd.bookingStatus " +
+           "LEFT JOIN FETCH b.bookingMethod bm " +
+           "LEFT JOIN FETCH b.bookedBy u " +
+           "LEFT JOIN FETCH bd.bookingStatus bs " +
+           "LEFT JOIN FETCH bd.room r " +
            "ORDER BY b.bookedDate DESC")
     List<Booking> findRecentBookings(Pageable pageable);
 }

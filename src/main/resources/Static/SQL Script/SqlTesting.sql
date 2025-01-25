@@ -78,7 +78,26 @@ INSERT INTO role (user_role_id, name, description) VALUES
 ('ROLE003', 'STAFF', 'Hotel Staff'),
 ('ROLE004', 'CUSTOMER', 'Hotel Guest');
 
--- Role Permissions
+-- Users (Insert BEFORE user_roles)
+-- Note: All passwords are '12345678'
+-- BCrypt hash: '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2'
+INSERT INTO user (user_id, username, password, first_name, last_name, dob) VALUES
+-- Admin users
+-- ('USER001', 'admin', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'System', 'Admin', '1990-01-01'),
+-- Managers
+('USER002', 'manager1', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'John', 'Manager', '1985-03-15'),
+('USER003', 'manager2', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Jane', 'Director', '1988-07-22'),
+-- Staff
+('USER004', 'staff1', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Mike', 'Staff', '1992-05-10'),
+('USER005', 'staff2', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Sarah', 'Employee', '1995-11-30'),
+-- Customers
+('USER006', 'customer1', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Tom', 'Customer', '1991-04-20'),
+('USER007', 'customer2', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Mary', 'Guest', '1993-08-15'),
+('USER008', 'customer3', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Peter', 'Client', '1987-12-03'),
+('USER009', 'customer4', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Linda', 'Visitor', '1994-06-25'),
+('USER010', 'customer5', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'James', 'Tourist', '1989-09-17');
+
+-- Role Permissions (Insert AFTER roles and permissions)
 INSERT INTO role_permissions (role_user_role_id, permissions_name) VALUES
 -- Admin permissions
 ('ROLE001', 'VIEW_DASHBOARD'),
@@ -103,28 +122,9 @@ INSERT INTO role_permissions (role_user_role_id, permissions_name) VALUES
 -- Customer permissions
 ('ROLE004', 'MANAGE_BOOKINGS');
 
--- Users
--- Note: All passwords are '12345678'
--- BCrypt hash: '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2'
-INSERT INTO user (user_id, username, password, first_name, last_name, dob) VALUES
--- Admin users
-('USER001', 'admin', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'System', 'Admin', '1990-01-01'),
--- Managers
-('USER002', 'manager1', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'John', 'Manager', '1985-03-15'),
-('USER003', 'manager2', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Jane', 'Director', '1988-07-22'),
--- Staff
-('USER004', 'staff1', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Mike', 'Staff', '1992-05-10'),
-('USER005', 'staff2', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Sarah', 'Employee', '1995-11-30'),
--- Customers
-('USER006', 'customer1', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Tom', 'Customer', '1991-04-20'),
-('USER007', 'customer2', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Mary', 'Guest', '1993-08-15'),
-('USER008', 'customer3', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Peter', 'Client', '1987-12-03'),
-('USER009', 'customer4', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Linda', 'Visitor', '1994-06-25'),
-('USER010', 'customer5', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'James', 'Tourist', '1989-09-17');
-
--- User Roles
+-- User Roles (Insert AFTER both users and roles)
 INSERT INTO user_roles (user_user_id, roles_user_role_id) VALUES
-('USER001', 'ROLE001'), -- Admin
+-- ('USER001', 'ROLE001'), -- Admin
 ('USER002', 'ROLE002'), -- Manager
 ('USER003', 'ROLE002'), -- Manager
 ('USER004', 'ROLE003'), -- Staff
@@ -139,13 +139,25 @@ INSERT INTO user_roles (user_user_id, roles_user_role_id) VALUES
 -- 3. Branches and Rooms
 -- =============================================
 
--- Branches (Managed by USER002 and USER003)
+-- Add more managers to the user table
+INSERT INTO user (user_id, username, password, first_name, last_name, dob) VALUES
+('USER011', 'manager3', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Robert', 'Manager', '1986-04-15'),
+('USER012', 'manager4', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'Emma', 'Director', '1987-08-20'),
+('USER013', 'manager5', '$2a$10$vXy1.FGLZkxfZ5D5q3T5/.TRxKlOr1F9qzTOhDZtKqIRtxVytRze2', 'David', 'Manager', '1984-11-25');
+
+-- Add role assignments for new managers
+INSERT INTO user_roles (user_user_id, roles_user_role_id) VALUES
+('USER011', 'ROLE002'), -- Manager
+('USER012', 'ROLE002'), -- Manager
+('USER013', 'ROLE002'); -- Manager
+
+-- Updated branches with unique managers
 INSERT INTO branches (branch_id, address, branch_phone_num, last_maintenance_date, number_of_rooms, started_date, manager_id) VALUES
 ('BR001', '123 Main Street, Downtown', '+1234567890', '2023-12-15', '20', '2020-01-01', 'USER002'),
 ('BR002', '456 Park Avenue, Uptown', '+1234567891', '2023-12-20', '25', '2020-03-15', 'USER003'),
-('BR003', '789 Beach Road, Seaside', '+1234567892', '2023-12-25', '15', '2021-01-01', 'USER002'),
-('BR004', '321 Mountain View, Heights', '+1234567893', '2023-12-30', '30', '2021-06-15', 'USER003'),
-('BR005', '654 Lake Drive, Riverside', '+1234567894', '2024-01-05', '20', '2022-01-01', 'USER002');
+('BR003', '789 Beach Road, Seaside', '+1234567892', '2023-12-25', '15', '2021-01-01', 'USER011'),
+('BR004', '321 Mountain View, Heights', '+1234567893', '2023-12-30', '30', '2021-06-15', 'USER012'),
+('BR005', '654 Lake Drive, Riverside', '+1234567894', '2024-01-05', '20', '2022-01-01', 'USER013');
 
 -- =============================================
 -- 4. Rooms and Room Pictures
@@ -242,41 +254,41 @@ INSERT INTO bookings (booking_id, booked_date, room_count, total_amount, active,
 ('BK010', '2024-01-20 11:30:00', 2, 880.00, 1, 'USER010', 1);
 
 -- Booking Details for Past Bookings
-INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_date, check_out_date, adult, child, 
+INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_date, check_out_date, adult, child,
                            total_room_charge, service_charge, item_charge, total_amount, booking_status_id) VALUES
 -- July 2023 Booking
-('BD001', 'BK001', 'RM001', '2023-07-20 14:00:00', '2023-07-22 12:00:00', 2, 0, 
+('BD001', 'BK001', 'RM001', '2023-07-20 14:00:00', '2023-07-22 12:00:00', 2, 0,
         200.00, 80.00, 50.00, 330.00, 4),
 -- August 2023 Booking
-('BD002', 'BK002', 'RM004', '2023-08-25 14:00:00', '2023-08-27 12:00:00', 2, 1, 
+('BD002', 'BK002', 'RM004', '2023-08-25 14:00:00', '2023-08-27 12:00:00', 2, 1,
         440.00, 200.00, 110.00, 750.00, 4),
 -- September 2023 Booking
-('BD003', 'BK003', 'RM007', '2023-09-10 14:00:00', '2023-09-12 12:00:00', 2, 0, 
+('BD003', 'BK003', 'RM007', '2023-09-10 14:00:00', '2023-09-12 12:00:00', 2, 0,
         340.00, 50.00, 30.00, 420.00, 4),
 -- October 2023 Booking
-('BD004', 'BK004', 'RM015', '2023-10-15 14:00:00', '2023-10-17 12:00:00', 2, 1, 
+('BD004', 'BK004', 'RM015', '2023-10-15 14:00:00', '2023-10-17 12:00:00', 2, 1,
         420.00, 80.00, 50.00, 550.00, 4),
 -- November 2023 Booking
-('BD005', 'BK005', 'RM018', '2023-11-30 14:00:00', '2023-12-02 12:00:00', 2, 2, 
+('BD005', 'BK005', 'RM018', '2023-11-30 14:00:00', '2023-12-02 12:00:00', 2, 2,
         620.00, 260.00, 100.00, 980.00, 4);
 
 -- Booking Details for Current Bookings
-INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_date, check_out_date, adult, child, 
+INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_date, check_out_date, adult, child,
                            total_room_charge, service_charge, item_charge, total_amount, booking_status_id) VALUES
 -- January 2024 Current Bookings
-('BD006', 'BK006', 'RM002', '2024-01-12 14:00:00', '2024-01-14 12:00:00', 2, 0, 
+('BD006', 'BK006', 'RM002', '2024-01-12 14:00:00', '2024-01-14 12:00:00', 2, 0,
         300.00, 90.00, 50.00, 440.00, 3),
-('BD007', 'BK007', 'RM005', '2024-01-15 14:00:00', '2024-01-17 12:00:00', 2, 1, 
+('BD007', 'BK007', 'RM005', '2024-01-15 14:00:00', '2024-01-17 12:00:00', 2, 1,
         500.00, 110.00, 50.00, 660.00, 2),
-('BD008', 'BK008', 'RM008', '2024-01-20 14:00:00', '2024-01-22 12:00:00', 2, 2, 
+('BD008', 'BK008', 'RM008', '2024-01-20 14:00:00', '2024-01-22 12:00:00', 2, 2,
         600.00, 190.00, 100.00, 890.00, 1);
 
 -- Booking Details for Future Bookings
-INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_date, check_out_date, adult, child, 
+INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_date, check_out_date, adult, child,
                            total_room_charge, service_charge, item_charge, total_amount, booking_status_id) VALUES
-('BD009', 'BK009', 'RM010', '2024-02-01 14:00:00', '2024-02-03 12:00:00', 2, 0, 
+('BD009', 'BK009', 'RM010', '2024-02-01 14:00:00', '2024-02-03 12:00:00', 2, 0,
         300.00, 90.00, 50.00, 440.00, 1),
-('BD010', 'BK010', 'RM020', '2024-03-15 14:00:00', '2024-03-17 12:00:00', 2, 1, 
+('BD010', 'BK010', 'RM020', '2024-03-15 14:00:00', '2024-03-17 12:00:00', 2, 1,
         600.00, 180.00, 100.00, 880.00, 1);
 
 -- =============================================
@@ -284,7 +296,7 @@ INSERT INTO booking_details (booking_detail_id, booking_id, room_id, check_in_da
 -- =============================================
 
 -- Payments for Completed Bookings
-INSERT INTO payments (payment_id, booking_id, amount, discount, service_charges, item_charges, 
+INSERT INTO payments (payment_id, booking_id, amount, discount, service_charges, item_charges,
                      total, total_paid, paid_date, payment_status_id, payment_type_id) VALUES
 ('PAY001', 'BK001', 330.00, 0.00, 80.00, 50.00, 330.00, 330.00, '2023-07-20 14:30:00', 2, 2),
 ('PAY002', 'BK002', 750.00, 50.00, 200.00, 110.00, 750.00, 750.00, '2023-08-25 15:00:00', 2, 1),
@@ -293,14 +305,14 @@ INSERT INTO payments (payment_id, booking_id, amount, discount, service_charges,
 ('PAY005', 'BK005', 980.00, 100.00, 260.00, 100.00, 980.00, 980.00, '2023-11-30 12:00:00', 2, 1);
 
 -- Payments for Current Bookings
-INSERT INTO payments (payment_id, booking_id, amount, discount, service_charges, item_charges, 
+INSERT INTO payments (payment_id, booking_id, amount, discount, service_charges, item_charges,
                      total, total_paid, paid_date, payment_status_id, payment_type_id) VALUES
 ('PAY006', 'BK006', 440.00, 0.00, 90.00, 50.00, 440.00, 440.00, '2024-01-12 14:30:00', 2, 2),
 ('PAY007', 'BK007', 660.00, 40.00, 110.00, 50.00, 660.00, 660.00, '2024-01-15 15:00:00', 1, 1),
 ('PAY008', 'BK008', 890.00, 60.00, 190.00, 100.00, 890.00, 0.00, '2024-01-20 10:00:00', 1, 2);
 
 -- Invoices
-INSERT INTO invoice (invoice_id, booking_id, total_amount, discounted_amount, tax, promotion, final_amount, invoice_date) VALUES
+INSERT INTO invoice (invoice_id, booking_id, total_amount, discounted_amount, tax, promotion_in_percentage, final_amount, invoice_date) VALUES
 ('INV001', 'BK001', 330.00, 0.00, 23.10, 0.00, 353.10, '2023-07-20 14:35:00'),
 ('INV002', 'BK002', 750.00, 50.00, 49.00, 10.00, 749.00, '2023-08-25 15:05:00'),
 ('INV003', 'BK003', 420.00, 0.00, 29.40, 0.00, 449.40, '2023-09-10 10:05:00'),
@@ -350,7 +362,7 @@ INSERT INTO room_item_usage (item_usage_id, booking_detail_id, item_id, quantity
 -- 11. Ratings and Reviews
 -- =============================================
 
-INSERT INTO rates (rate_id, room_id, rated_by, rate_date, feedback_comment, rate) VALUES
+INSERT INTO rates (rate_id, room_id, rated_by, rate_date, feedback_comment, stars) VALUES
 -- Past stays ratings
 (1, 'RM001', 'USER006', '2023-07-22 12:30:00', 'Great room, excellent service!', 5),
 (2, 'RM004', 'USER007', '2023-08-27 12:45:00', 'Very comfortable stay, will come back', 4),
