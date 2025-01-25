@@ -4,12 +4,12 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class RoomTypeResponse {
-    int roomTypeId;
+    String roomTypeId;
     String roomTypeName;
     String description;
     String occupancy;

@@ -48,6 +48,7 @@ public enum ErrorCode {
     PAYMENT_TYPE_NOT_FOUND(1020, "Payment type not found", HttpStatus.NOT_FOUND),
     PAYMENT_STATUS_NOT_FOUND(1021, "Payment status not found", HttpStatus.NOT_FOUND),
     PAYMENT_NOT_FOUND(1022, "Payment not found", HttpStatus.NOT_FOUND),
+    ROOM_TYPE_NOT_FOUND(1023, "Room type not found", HttpStatus.NOT_FOUND),
 
     ;
 
