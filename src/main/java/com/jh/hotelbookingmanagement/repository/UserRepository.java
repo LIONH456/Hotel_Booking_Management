@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.time.LocalDateTime;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 //           "JOIN roles r " +
 //           "WHERE r.name = 'USER'")
 //    long countCustomers();
+
+    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = 'USER' ORDER BY u.userId DESC")
+    List<User> findRecentCustomers(Pageable pageable);
 }

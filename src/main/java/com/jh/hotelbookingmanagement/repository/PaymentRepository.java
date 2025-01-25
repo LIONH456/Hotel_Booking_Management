@@ -12,18 +12,20 @@ import java.util.List;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, String> {
-    List<Payment> findByBookingBookingId(String bookingId);
+    @Query(value = "SELECT * FROM payments WHERE booking_id = :bookingId", nativeQuery = true)
+    List<Payment> findByBookingBookingId(@Param("bookingId") String bookingId);
 
-    @Query("SELECT COALESCE(SUM(p.total), 0) FROM Payment p")
+    @Query(value = "SELECT COALESCE(SUM(total), 0) FROM payments", nativeQuery = true)
     double findTotalRevenue();
 
-    @Query("SELECT new com.jh.hotelbookingmanagement.dto.response.RevenueStats(" +
-            "CAST(p.paidDate AS date) as date, " +
-            "SUM(p.total) as revenue, " +
-            "COUNT(p) as bookingCount) " +
-            "FROM Payment p " +
-            "WHERE p.paidDate >= :startDate " +
-            "GROUP BY CAST(p.paidDate AS date) " +
-            "ORDER BY date")
+    @Query(value = """
+        SELECT DATE(paid_date) as date,
+        SUM(total) as revenue,
+        COUNT(*) as booking_count
+        FROM payments
+        WHERE paid_date >= :startDate
+        GROUP BY DATE(paid_date)
+        ORDER BY date
+        """, nativeQuery = true)
     List<RevenueStats> findMonthlyRevenue(@Param("startDate") LocalDate startDate);
 }
