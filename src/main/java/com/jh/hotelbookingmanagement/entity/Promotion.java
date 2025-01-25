@@ -1,5 +1,6 @@
 package com.jh.hotelbookingmanagement.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.*;
@@ -24,10 +25,10 @@ public class Promotion {
     String promotionName;
 
     @Column(name = "Start_Date")
-    Date startDate;
+    LocalDate startDate;
 
     @Column(name = "End_Date")
-    Date endDate;
+    LocalDate endDate;
 
     @Column(name = "Discount")
     double discount;
