@@ -3,8 +3,7 @@ package com.jh.hotelbookingmanagement.configuration;
 import java.util.HashSet;
 
 import com.jh.hotelbookingmanagement.constant.PredefinedPictureCategory;
-import com.jh.hotelbookingmanagement.entity.Picture;
-import com.jh.hotelbookingmanagement.entity.PictureCategory;
+import com.jh.hotelbookingmanagement.entity.*;
 import com.jh.hotelbookingmanagement.repository.*;
 import com.jh.hotelbookingmanagement.service.SqlFileExecutorService;
 import org.springframework.boot.ApplicationRunner;
@@ -14,8 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.jh.hotelbookingmanagement.constant.PredefinedRole;
-import com.jh.hotelbookingmanagement.entity.Role;
-import com.jh.hotelbookingmanagement.entity.User;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +43,9 @@ public class ApplicationInitConfig {
     ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository, PictureCategoryRepository pictureCategoryRepository, BookingMethodRepository bookingMethodRepository,
                                         BookingStatusRepository bookingStatusRepository,
                                         PaymentTypeRepository paymentTypeRepository,
-                                        PromotionRepository promotionRepository) {
+                                        PromotionRepository promotionRepository,
+                                        RoomStatusRepository roomStatusRepository,
+                                        RoomTypeRepository roomTypeRepository) {
         log.info("Initializing application.....");
         return args -> {
             if (userRepository.findByUsername(ADMIN_USER_NAME).isEmpty()) {
@@ -103,6 +102,17 @@ public class ApplicationInitConfig {
             if(promotionRepository.findAll().isEmpty()){
                 sqlFileExecutorService.executeSqlFile("InsertPromotion.sql");
                 log.warn("Initialize Promotion");
+            }
+
+            if (roomStatusRepository.findAll().isEmpty()) {
+                sqlFileExecutorService.executeSqlFile("InsertRoomStatuses.sql");
+                log.warn("Initializing Room Statuses");
+            }
+
+            // Add logic for room types
+            if (roomTypeRepository.findAll().isEmpty()) {
+                sqlFileExecutorService.executeSqlFile("InsertRoomTypes.sql");
+                log.warn("Initializing Room Types");
             }
             log.info("Application initialization completed .....");
             
