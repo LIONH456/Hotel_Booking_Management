@@ -13,8 +13,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomCreationRequest {
     String roomNumber;
-    RoomStatus roomStatusId;
-    RoomType roomTypeId;
+    Long roomStatusId;
+    Long roomTypeId;
     String branchId;
     String description;
     double price;

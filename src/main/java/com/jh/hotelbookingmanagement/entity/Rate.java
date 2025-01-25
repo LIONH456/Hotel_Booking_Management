@@ -31,7 +31,7 @@ public class Rate {
     @Column(name = "Rate_Date")
     Date rateDate;
 
-    @Column(name = "Rate(Stars)")
+    @Column(name = "Stars")
     int rateStars;
 
     @Column(name = "Feedback_Comment")

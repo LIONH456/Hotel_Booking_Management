@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,8 +20,8 @@ import java.util.Date;
 public class BookingDetailRequest {
     String bookingId;
     String roomId;
-    Date checkInDate;
-    Date checkOutDate;
+    LocalDateTime checkInDate;
+    LocalDateTime checkOutDate;
     int adult;
     int child;
     Promotion promotion;

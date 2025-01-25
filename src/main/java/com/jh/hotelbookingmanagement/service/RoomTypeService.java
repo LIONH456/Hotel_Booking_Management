@@ -10,7 +10,7 @@ public interface RoomTypeService {
     
     List<RoomTypeResponse> getAllRoomType();
 
-    RoomTypeResponse updateRoomType(String roomTypeId, RoomTypeRequest request);
+    RoomTypeResponse updateRoomType(Long roomTypeId, RoomTypeRequest request);
 
-    void deleteRoomType(String roomTypeId);
+    void deleteRoomType(Long roomTypeId);
 } 

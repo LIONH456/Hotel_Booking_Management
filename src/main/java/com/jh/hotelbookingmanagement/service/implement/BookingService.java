@@ -2,6 +2,7 @@ package com.jh.hotelbookingmanagement.service.implement;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 import com.jh.hotelbookingmanagement.dto.request.RoomTypeRequest;
 import com.jh.hotelbookingmanagement.dto.response.RoomTypeResponse;
@@ -15,6 +16,7 @@ import com.jh.hotelbookingmanagement.dto.request.BookingCreationRequest;
 import com.jh.hotelbookingmanagement.dto.request.BookingUpdateRequest;
 import com.jh.hotelbookingmanagement.dto.response.BookingResponse;
 import com.jh.hotelbookingmanagement.entity.Booking;
+import com.jh.hotelbookingmanagement.entity.BookingDetail;
 import com.jh.hotelbookingmanagement.exception.AppException;
 import com.jh.hotelbookingmanagement.exception.ErrorCode;
 import com.jh.hotelbookingmanagement.mapper.BookingMapper;
@@ -41,22 +43,21 @@ public class BookingService {
     BookingMethodRepository bookingMethodRepository;
 
     public BookingResponse createRequest(BookingCreationRequest request) {
-
         Booking booking = bookingMapper.toBooking(request);
-        booking.setBookedBy(userRepository.findById(request.getBookedBy()).orElseThrow(()->new AppException(ErrorCode.USER_NOT_EXISTED)));
-        booking.setBookingMethod(bookingMethodRepository.findById(request.getBookingMethodId()).orElseThrow(()->new AppException(ErrorCode.BOOKING_METHOD_NOT_FOUND)));
+        
+        // Validate user and booking method
+        booking.setBookedBy(userRepository.findById(request.getBookedBy())
+            .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED)));
+        booking.setBookingMethod(bookingMethodRepository.findById(request.getBookingMethodId())
+            .orElseThrow(() -> new AppException(ErrorCode.BOOKING_METHOD_NOT_FOUND)));
+        
+        // Initialize booking
         booking.setRoomCount(0);
-        booking.setBookingDetails(bookingDetailRepository.findAllByBooking_BookingId(booking.getBookingId()));
-//        List<String> bookingStatuses = bookingRepository.isActive(booking.getBookingId());
-//        booking.setActive(true);
-//        log.info("this works");
-//        for(String bookingStatus:bookingStatuses) {
-//            log.info("Loop Work");
-//            if (bookingStatus == "1") {
-//                booking.setActive(false);
-//                log.info(bookingStatus);
-//            }
-//        }
+        booking.setTotalAmount(0.0);  // Initialize total amount
+        booking.setActive(true);      // Set initial active status
+        booking.setBookedDate(LocalDateTime.now());  // Set current timestamp
+        
+        // Save and return
         booking = bookingRepository.save(booking);
         return bookingMapper.toBookingResponse(booking);
     }
@@ -88,6 +89,19 @@ public class BookingService {
         return bookingRepository.findByBookedByUserId(userId);
     }
 
+    // Add method to update booking total amount
+    public void updateBookingTotalAmount(String bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+            .orElseThrow(() -> new AppException(ErrorCode.BOOKING_NOT_FOUND));
+            
+        Double totalAmount = booking.getBookingDetails().stream()
+            .mapToDouble(BookingDetail::getTotalAmount)
+            .sum();
+            
+        booking.setTotalAmount(totalAmount);
+        bookingRepository.save(booking);
+    }
+
     @Service
     @RequiredArgsConstructor
     public static class RoomTypeServiceImpl implements RoomTypeService {
@@ -110,7 +124,7 @@ public class BookingService {
         }
 
         @Override
-        public RoomTypeResponse updateRoomType(String roomTypeId, RoomTypeRequest request) {
+        public RoomTypeResponse updateRoomType(Long roomTypeId, RoomTypeRequest request) {
             RoomType roomType = roomTypeRepository.findById(roomTypeId)
                     .orElseThrow(() -> new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND));
 
@@ -120,7 +134,7 @@ public class BookingService {
         }
 
         @Override
-        public void deleteRoomType(String roomTypeId) {
+        public void deleteRoomType(Long roomTypeId) {
             if (!roomTypeRepository.existsById(roomTypeId)) {
                 throw new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND);
             }

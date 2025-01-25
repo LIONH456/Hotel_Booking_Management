@@ -71,49 +71,49 @@ public class ApplicationInitConfig {
                 userRepository.save(user);
                 log.warn("admin user has been created with default password: admin, please change it");
             }
-            if(pictureCategoryRepository.findAll().isEmpty()){
-                pictureCategoryRepository.save(PictureCategory.builder()
-                        .categoryName(PredefinedPictureCategory.ROOM)
-                        .description("Room Picture")
-                        .build());
-                log.warn("ROOM and BRANCH have been initial added into picture category");
-
-                pictureCategoryRepository.save(PictureCategory.builder()
-                        .categoryName(PredefinedPictureCategory.BRANCH)
-                        .description("Branch Picture")
-                        .build());
-                log.warn("ROOM and BRANCH have been initial added into picture category");
-            }
-            if(bookingMethodRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("InsertBookingMethod.sql");
-                log.warn("Initialize Booking Method");
-            }
-
-            if(bookingStatusRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("InsertBookingStatuses.sql");
-                log.warn("Initialize Booking Status");
-            }
-
-            if(paymentTypeRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("InsertPaymentType.sql");
-                log.warn("Initialize Payment Type");
-            }
-
-            if(promotionRepository.findAll().isEmpty()){
-                sqlFileExecutorService.executeSqlFile("InsertPromotion.sql");
-                log.warn("Initialize Promotion");
-            }
-
-            if (roomStatusRepository.findAll().isEmpty()) {
-                sqlFileExecutorService.executeSqlFile("InsertRoomStatuses.sql");
-                log.warn("Initializing Room Statuses");
-            }
-
-            // Add logic for room types
-            if (roomTypeRepository.findAll().isEmpty()) {
-                sqlFileExecutorService.executeSqlFile("InsertRoomTypes.sql");
-                log.warn("Initializing Room Types");
-            }
+//            if(pictureCategoryRepository.findAll().isEmpty()){
+//                pictureCategoryRepository.save(PictureCategory.builder()
+//                        .categoryName(PredefinedPictureCategory.ROOM)
+//                        .description("Room Picture")
+//                        .build());
+//                log.warn("ROOM and BRANCH have been initial added into picture category");
+//
+//                pictureCategoryRepository.save(PictureCategory.builder()
+//                        .categoryName(PredefinedPictureCategory.BRANCH)
+//                        .description("Branch Picture")
+//                        .build());
+//                log.warn("ROOM and BRANCH have been initial added into picture category");
+//            }
+//            if(bookingMethodRepository.findAll().isEmpty()){
+//                sqlFileExecutorService.executeSqlFile("InsertBookingMethod.sql");
+//                log.warn("Initialize Booking Method");
+//            }
+//
+//            if(bookingStatusRepository.findAll().isEmpty()){
+//                sqlFileExecutorService.executeSqlFile("InsertBookingStatuses.sql");
+//                log.warn("Initialize Booking Status");
+//            }
+//
+//            if(paymentTypeRepository.findAll().isEmpty()){
+//                sqlFileExecutorService.executeSqlFile("InsertPaymentType.sql");
+//                log.warn("Initialize Payment Type");
+//            }
+//
+//            if(promotionRepository.findAll().isEmpty()){
+//                sqlFileExecutorService.executeSqlFile("InsertPromotion.sql");
+//                log.warn("Initialize Promotion");
+//            }
+//
+//            if (roomStatusRepository.findAll().isEmpty()) {
+//                sqlFileExecutorService.executeSqlFile("InsertRoomStatuses.sql");
+//                log.warn("Initializing Room Statuses");
+//            }
+//
+//            // Add logic for room types
+//            if (roomTypeRepository.findAll().isEmpty()) {
+//                sqlFileExecutorService.executeSqlFile("InsertRoomTypes.sql");
+//                log.warn("Initializing Room Types");
+//            }
             log.info("Application initialization completed .....");
             
         };

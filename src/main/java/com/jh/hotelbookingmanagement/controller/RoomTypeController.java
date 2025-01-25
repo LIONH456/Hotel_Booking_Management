@@ -34,12 +34,12 @@ public class RoomTypeController {
     }
 
     @PutMapping("/{roomTypeId}")
-    RoomTypeResponse updateRoomType(@PathVariable String roomTypeId, @RequestBody RoomTypeRequest request) {
+    RoomTypeResponse updateRoomType(@PathVariable Long roomTypeId, @RequestBody RoomTypeRequest request) {
         return roomTypeService.updateRoomType(roomTypeId, request);
     }
 
     @DeleteMapping("/{roomTypeId}")
-    ApiResponse<String> deleteRoomType(@PathVariable String roomTypeId) {
+    ApiResponse<String> deleteRoomType(@PathVariable Long roomTypeId) {
         roomTypeService.deleteRoomType(roomTypeId);
         return ApiResponse.<String>builder().result("This room type has been Deleted!").build();
     }

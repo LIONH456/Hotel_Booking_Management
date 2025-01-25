@@ -4,6 +4,7 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -114,4 +115,12 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
         LIMIT 10
         """, nativeQuery = true)
     List<Booking> findLatestBookings();
+
+    @Query("SELECT DISTINCT b FROM Booking b " +
+           "LEFT JOIN FETCH b.bookingDetails bd " +
+           "LEFT JOIN FETCH b.bookingMethod " +
+           "LEFT JOIN FETCH b.bookedBy " +
+           "LEFT JOIN FETCH bd.bookingStatus " +
+           "ORDER BY b.bookedDate DESC")
+    List<Booking> findRecentBookings(Pageable pageable);
 }

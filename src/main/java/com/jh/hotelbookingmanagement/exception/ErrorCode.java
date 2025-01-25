@@ -49,7 +49,9 @@ public enum ErrorCode {
     PAYMENT_STATUS_NOT_FOUND(1021, "Payment status not found", HttpStatus.NOT_FOUND),
     PAYMENT_NOT_FOUND(1022, "Payment not found", HttpStatus.NOT_FOUND),
     ROOM_TYPE_NOT_FOUND(1023, "Room type not found", HttpStatus.NOT_FOUND),
-
+    ROOM_STATUS_NOT_FOUND(1024, "Room status not found", HttpStatus.NOT_FOUND),
+    BOOKING_DETAIL_NOT_FOUND(1025, "Booking detail not found", HttpStatus.NOT_FOUND),
+    ROOM_NOT_AVAILABLE(1026, "Room Is not availiable during this time", HttpStatus.BAD_REQUEST)
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {

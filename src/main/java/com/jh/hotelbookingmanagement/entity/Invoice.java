@@ -40,10 +40,10 @@ public class Invoice {
 //    @JoinColumn(name = "Promotion_ID", referencedColumnName = "Promotion_ID")
 //    Promotion promotion;
 
-    @Column(name="Promotion(%)")
+    @Column(name="promotion_In_Percentage")
     double promotionInPercentage;
 
-    @Column(name="Discounted Amount")
+    @Column(name="Discounted_Amount")
     double discountedAmount;
 
     @Column(name = "Tax")

@@ -15,6 +15,8 @@ import com.jh.hotelbookingmanagement.entity.Room;
 public interface RoomMapper {
 
     @Mapping(target = "branch", ignore = true)
+    @Mapping(target = "roomStatusId", ignore = true)
+    @Mapping(target = "roomTypeId", ignore = true)
     Room toRoom(RoomCreationRequest request);
 
     @Mapping(target = "branchId", source = "branch.branchId")

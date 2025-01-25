@@ -3,6 +3,8 @@ package com.jh.hotelbookingmanagement.service.implement;
 import java.util.List;
 
 import com.jh.hotelbookingmanagement.repository.BranchRepository;
+import com.jh.hotelbookingmanagement.repository.RoomStatusRepository;
+import com.jh.hotelbookingmanagement.repository.RoomTypeRepository;
 import org.springframework.stereotype.Service;
 
 import com.jh.hotelbookingmanagement.dto.request.RoomCreationRequest;
@@ -24,13 +26,27 @@ import lombok.extern.slf4j.Slf4j;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @RequiredArgsConstructor
 public class RoomService {
-    RoomRepository roomRepository;
-    RoomMapper roomMapper;
-    BranchRepository branchRepository;
+    private final RoomRepository roomRepository;
+    private final RoomMapper roomMapper;
+    private final BranchRepository branchRepository;
+    private final RoomStatusRepository roomStatusRepository;
+    private final RoomTypeRepository roomTypeRepository;
 
     public RoomResponse createRoom(RoomCreationRequest request) {
         Room room = roomMapper.toRoom(request);
-        room.setBranch(branchRepository.findById(request.getBranchId()).orElseThrow(()->new AppException(ErrorCode.BRANCH_NOT_FOUND)));
+        
+        // Set branch
+        room.setBranch(branchRepository.findById(request.getBranchId())
+            .orElseThrow(() -> new AppException(ErrorCode.BRANCH_NOT_FOUND)));
+        
+        // Set room status
+        room.setRoomStatusId(roomStatusRepository.findById(request.getRoomStatusId())
+            .orElseThrow(() -> new AppException(ErrorCode.ROOM_STATUS_NOT_FOUND)));
+        
+        // Set room type
+        room.setRoomTypeId(roomTypeRepository.findById(request.getRoomTypeId())
+            .orElseThrow(() -> new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND)));
+
         room = roomRepository.save(room);
         return roomMapper.toRoomRespone(room);
     }
