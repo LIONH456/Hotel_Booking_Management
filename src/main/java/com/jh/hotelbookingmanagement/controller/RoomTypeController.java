@@ -15,7 +15,8 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
- @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@RequestMapping("/roomType")
 public class RoomTypeController {
     RoomTypeService roomTypeService;
 

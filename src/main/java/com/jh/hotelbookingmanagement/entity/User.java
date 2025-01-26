@@ -30,9 +30,24 @@ public class User {
     String username;
 
     String password;
+
+    @Column(name = "First_Name")
     String firstName;
+
+    @Column(name = "Date_Of_Birth")
     LocalDate dob;
+
+    @Column(name = "Last_Name")
     String lastName;
+
+    @Column(name = "Email")
+    String email;
+
+    @Column(name="Gender")
+    String gender;
+
+    @Column(name="Phone_Number")
+    String phoneNumber;
 
     @ManyToMany
     Set<Role> roles;

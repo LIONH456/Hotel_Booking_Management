@@ -39,12 +39,16 @@ public class UserService {
 
     public UserResponse createUser(UserCreationRequest request) {
         User user = userMapper.toUser(request);
-
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
+        // Create a new HashSet for roles
         HashSet<Role> roles = new HashSet<>();
-        roleRepository.findById(PredefinedRole.USER_ROLE).ifPresent(roles::add);
-
+        
+        // Find the USER role and add it if found
+        Role userRole = roleRepository.findByName(PredefinedRole.USER_ROLE)
+            .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+        roles.add(userRole);
+        
         user.setRoles(roles);
 
         try {
@@ -65,34 +69,74 @@ public class UserService {
         return userMapper.toUserResponse(user);
     }
 
-    @PostAuthorize("returnObject.username == authentication.name")
+    //@PostAuthorize("returnObject.username == authentication.name")
     public UserResponse updateUser(String userId, UserUpdateRequest request) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
+        // First update the user with non-password fields
         userMapper.updateUser(user, request);
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        
+        // Only encode and update password if it's provided
+        if (request.getPassword() != null && !request.getPassword().trim().isEmpty()) {
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
+        }
+        // If password is not provided, keep the existing password
 
-        // error
-//        var roles = roleRepository.findAllById(request.getRoles());
-//        user.setRoles(new HashSet<>(roles));
+        try {
+            user = userRepository.save(user);
+        } catch (DataIntegrityViolationException exception) {
+            throw new AppException(ErrorCode.USER_UPDATE_FAILED);
+        }
 
-        return userMapper.toUserResponse(userRepository.save(user));
+        return userMapper.toUserResponse(user);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(String userId) {
         userRepository.deleteById(userId);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers() {
-        log.info("In method get Users");
         return userRepository.findAll().stream().map(userMapper::toUserResponse).toList();
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public UserResponse getUser(String id) {
         return userMapper.toUserResponse(
                 userRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED)));
+    }
+
+    public List<UserResponse> getCustomers() {
+        log.info("Fetching customers");
+        return userRepository.findAll().stream()
+            .filter(user -> user.getRoles().stream()
+                .anyMatch(role -> role.getName().equals("CUSTOMER")))
+            .map(userMapper::toUserResponse)
+            .toList();
+    }
+
+    public UserResponse createCustomer(UserCreationRequest request) {
+        User user = userMapper.toUser(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        // Create a new HashSet for roles
+        HashSet<Role> roles = new HashSet<>();
+        
+        // Find the CUSTOMER role and add it if found
+        Role customerRole = roleRepository.findByName(PredefinedRole.CUSTOMER_ROLE)
+            .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+        roles.add(customerRole);
+        
+        user.setRoles(roles);
+
+        try {
+            user = userRepository.save(user);
+        } catch (DataIntegrityViolationException exception) {
+            throw new AppException(ErrorCode.USER_EXISTED);
+        }
+
+        return userMapper.toUserResponse(user);
     }
 }

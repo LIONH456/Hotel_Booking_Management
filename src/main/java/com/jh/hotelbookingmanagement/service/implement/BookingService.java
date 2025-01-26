@@ -102,43 +102,5 @@ public class BookingService {
         bookingRepository.save(booking);
     }
 
-    @Service
-    @RequiredArgsConstructor
-    public static class RoomTypeServiceImpl implements RoomTypeService {
-        private final RoomTypeRepository roomTypeRepository;
-        private final RoomTypeMapper roomTypeMapper;
 
-        @Override
-        public RoomTypeResponse createRoomType(RoomTypeRequest request) {
-            RoomType roomType = roomTypeMapper.toRoomType(request);
-            roomType = roomTypeRepository.save(roomType);
-            return roomTypeMapper.toRoomTypeResponse(roomType);
-        }
-
-        @Override
-        public List<RoomTypeResponse> getAllRoomType() {
-            return roomTypeRepository.findAll()
-                    .stream()
-                    .map(roomTypeMapper::toRoomTypeResponse)
-                    .collect(Collectors.toList());
-        }
-
-        @Override
-        public RoomTypeResponse updateRoomType(Long roomTypeId, RoomTypeRequest request) {
-            RoomType roomType = roomTypeRepository.findById(roomTypeId)
-                    .orElseThrow(() -> new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND));
-
-            roomTypeMapper.updateRoomType(roomType, request);
-            roomType = roomTypeRepository.save(roomType);
-            return roomTypeMapper.toRoomTypeResponse(roomType);
-        }
-
-        @Override
-        public void deleteRoomType(Long roomTypeId) {
-            if (!roomTypeRepository.existsById(roomTypeId)) {
-                throw new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND);
-            }
-            roomTypeRepository.deleteById(roomTypeId);
-        }
-    }
 }

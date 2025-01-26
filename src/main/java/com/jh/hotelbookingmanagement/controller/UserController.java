@@ -32,6 +32,13 @@ public class UserController {
                 .build();
     }
 
+    @PostMapping("/customers")
+    ApiResponse<UserResponse> createCustomer(@RequestBody @Valid UserCreationRequest request) {
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.createCustomer(request))
+                .build();
+    }
+
     @GetMapping
     ApiResponse<List<UserResponse>> getUsers() {
         return ApiResponse.<List<UserResponse>>builder()
@@ -63,6 +70,13 @@ public class UserController {
     ApiResponse<UserResponse> updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUser(userId, request))
+                .build();
+    }
+
+    @GetMapping("/customers")
+    ApiResponse<List<UserResponse>> getCustomers() {
+        return ApiResponse.<List<UserResponse>>builder()
+                .result(userService.getCustomers())
                 .build();
     }
 }
