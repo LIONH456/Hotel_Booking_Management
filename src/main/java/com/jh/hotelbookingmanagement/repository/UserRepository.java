@@ -25,6 +25,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 //           "WHERE r.name = 'USER'")
 //    long countCustomers();
 
-    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = 'USER' ORDER BY u.userId DESC")
+    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = 'CUSTOMER' ORDER BY u.userId DESC")
     List<User> findRecentCustomers(Pageable pageable);
 }

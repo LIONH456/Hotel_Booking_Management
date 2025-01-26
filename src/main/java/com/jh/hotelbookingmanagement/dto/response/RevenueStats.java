@@ -1,18 +1,21 @@
 package com.jh.hotelbookingmanagement.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import java.math.BigDecimal;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class RevenueStats {
-    private LocalDate date;
-    private double revenue;
-    private int bookingCount;
+    Integer month;
+    BigDecimal revenue;
+
+    // Constructor for native query
+    public RevenueStats(Object[] values) {
+        this.month = values[0] != null ? ((Number) values[0]).intValue() : null;
+        this.revenue = values[1] != null ? new BigDecimal(values[1].toString()) : BigDecimal.ZERO;
+    }
 } 

@@ -99,14 +99,15 @@ public interface BookingRepository extends JpaRepository<Booking, String> {
     List<Object[]> getRoomTypeDistribution();
 
     @Query(value = """
-        SELECT MONTH(b.booked_date) as month, SUM(i.total_amount) as revenue 
+        SELECT MONTH(b.booked_date) as month, 
+        COALESCE(SUM(i.total_amount), 0) as revenue
         FROM bookings b
-        JOIN invoice i ON b.booking_id = i.booking_id
+        LEFT JOIN invoice i ON b.booking_id = i.booking_id
         WHERE YEAR(b.booked_date) = YEAR(CURRENT_DATE)
         AND MONTH(b.booked_date) = :month
         GROUP BY MONTH(b.booked_date)
         """, nativeQuery = true)
-    List<RevenueStats> getMonthlyRevenue(@Param("month") int month);
+    List<Object[]> getMonthlyRevenue(@Param("month") int month);
 
     // Find latest 10 bookings
     @Query(value = """

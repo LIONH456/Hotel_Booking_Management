@@ -1,27 +1,26 @@
 package com.jh.hotelbookingmanagement.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class OccupancyStats {
-    private LocalDate date;
-    private int occupiedRooms;
-    private int totalRooms;
-    private double occupancyRate;
+    LocalDate date;
+    Integer occupiedRooms;
+    Integer totalRooms;
+    Double occupancyRate;
 
-    // Constructor for native query mapping
-    public OccupancyStats(java.sql.Date date, Long occupiedRooms, Long totalRooms, Double occupancyRate) {
-        this.date = date.toLocalDate();
-        this.occupiedRooms = occupiedRooms.intValue();
-        this.totalRooms = totalRooms.intValue();
-        this.occupancyRate = occupancyRate;
+    // Constructor for native query results
+    public OccupancyStats(Object[] values) {
+        this.date = values[0] != null ? ((java.sql.Date) values[0]).toLocalDate() : null;
+        this.occupiedRooms = values[1] != null ? ((Number) values[1]).intValue() : 0;
+        this.totalRooms = values[2] != null ? ((Number) values[2]).intValue() : 0;
+        this.occupancyRate = values[3] != null ? ((Number) values[3]).doubleValue() : 0.0;
     }
 } 

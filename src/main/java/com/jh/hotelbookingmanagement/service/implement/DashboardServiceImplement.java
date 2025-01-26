@@ -44,12 +44,18 @@ public class DashboardServiceImplement {
     }
 
     public List<RevenueStats> getMonthlyRevenue() {
-        return bookingRepository.getMonthlyRevenue(1);
+        List<Object[]> results = bookingRepository.getMonthlyRevenue(1);
+        return results.stream()
+            .map(RevenueStats::new)
+            .collect(Collectors.toList());
     }
 
     public List<OccupancyStats> getDailyOccupancy() {
         LocalDateTime startDate = LocalDateTime.now().minusDays(30);
-        return roomRepository.getDailyOccupancy(startDate);
+        List<Object[]> results = bookingRepository.getDailyOccupancy(startDate);
+        return results.stream()
+            .map(OccupancyStats::new)
+            .collect(Collectors.toList());
     }
 
     public List<BookingResponse> getRecentBookings() {
