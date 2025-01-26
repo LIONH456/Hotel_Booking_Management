@@ -44,4 +44,11 @@ public class RoomTypeController {
         roomTypeService.deleteRoomType(roomTypeId);
         return ApiResponse.<String>builder().result("This room type has been Deleted!").build();
     }
+
+    @GetMapping("/{roomTypeId}")
+    ApiResponse<RoomTypeResponse> getRoomTypeById(@PathVariable Long roomTypeId) {
+        return ApiResponse.<RoomTypeResponse>builder()
+                .result(roomTypeService.getRoomTypeById(roomTypeId))
+                .build();
+    }
 } 

@@ -13,4 +13,6 @@ public interface RoomTypeService {
     RoomTypeResponse updateRoomType(Long roomTypeId, RoomTypeRequest request);
 
     void deleteRoomType(Long roomTypeId);
+
+    RoomTypeResponse getRoomTypeById(Long roomTypeId);
 } 

@@ -52,4 +52,11 @@ public class RoomTypeServiceImpl implements RoomTypeService {
         }
         roomTypeRepository.deleteById(roomTypeId);
     }
+
+    @Override
+    public RoomTypeResponse getRoomTypeById(Long roomTypeId) {
+        RoomType roomType = roomTypeRepository.findById(roomTypeId)
+                .orElseThrow(() -> new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND));
+        return roomTypeMapper.toRoomTypeResponse(roomType);
+    }
 }
