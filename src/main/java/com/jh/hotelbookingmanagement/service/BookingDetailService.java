@@ -8,7 +8,7 @@ import com.jh.hotelbookingmanagement.entity.BookingDetail;
 import java.util.List;
 
 public interface BookingDetailService {
-    public BookingDetailResponse createBookingDetail(BookingDetailRequest request);
+    public BookingDetailResponse createBookingDetail(String bookingId, BookingDetailRequest request);
 
     public List<BookingDetailResponse> getBookingDetails();
 

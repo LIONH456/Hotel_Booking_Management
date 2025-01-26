@@ -40,7 +40,7 @@ public class BookingDetailServiceImplement implements BookingDetailService {
 
     @Override
     @Transactional
-    public BookingDetailResponse createBookingDetail(BookingDetailRequest request) {
+    public BookingDetailResponse createBookingDetail(String bookingId, BookingDetailRequest request) {
         // Validate dates
         if (request.getCheckInDate().isAfter(request.getCheckOutDate())) {
             throw new AppException(ErrorCode.INVALID_DATE_RANGE);
@@ -59,7 +59,7 @@ public class BookingDetailServiceImplement implements BookingDetailService {
         bookingDetail.setRoom(room);
 
         // Set booking
-        bookingDetail.setBooking(bookingRepository.findById(request.getBookingId())
+        bookingDetail.setBooking(bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new AppException(ErrorCode.BOOKING_NOT_FOUND)));
 
         // Calculate charges

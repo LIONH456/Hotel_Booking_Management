@@ -22,10 +22,12 @@ import java.util.List;
 public class BookingDetailController {
     BookingDetailService bookingDetailService;
 
-    @PostMapping
-    ApiResponse<BookingDetailResponse> createBooking(@RequestBody BookingDetailRequest request) {
+    @PostMapping("/{bookingId}")
+    public ApiResponse<BookingDetailResponse> createBookingDetail(
+            @PathVariable String bookingId,
+            @RequestBody BookingDetailRequest request) {
         return ApiResponse.<BookingDetailResponse>builder()
-                .result(bookingDetailService.createBookingDetail(request))
+                .result(bookingDetailService.createBookingDetail(bookingId, request))
                 .build();
     }
 

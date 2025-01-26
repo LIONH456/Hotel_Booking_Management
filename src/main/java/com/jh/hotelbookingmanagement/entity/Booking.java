@@ -29,6 +29,7 @@ import lombok.Setter;
 public class Booking {
     @Id
     @Column(name = "booking_id")
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String bookingId;
     
     @Column(name = "booked_date")

@@ -1,6 +1,7 @@
 package com.jh.hotelbookingmanagement.dto.request;
 
 import java.util.Date;
+import java.util.List;
 
 import com.jh.hotelbookingmanagement.entity.BookingMethod;
 import com.jh.hotelbookingmanagement.entity.BookingStatus;
@@ -16,7 +17,6 @@ import org.mapstruct.Mapping;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BookingCreationRequest {
     Long bookingMethodId;
-    Date bookedDate;
-    int roomCount;
-    String bookedBy;
+    String bookedBy;  // userId
+    List<BookingDetailRequest> bookingDetails;  // Include booking details directly
 }

@@ -11,7 +11,7 @@
 -- =============================================
 
 -- Booking Status
-INSERT INTO booking_status (booking_status_id, booking_status, description) VALUES
+INSERT INTO booking_status (booking_status_id, booking_status_name, description) VALUES
 (1, 'Pending', 'Booking is pending confirmation'),
 (2, 'Confirmed', 'Booking has been confirmed'),
 (3, 'Checked-in', 'Guest has checked in'),

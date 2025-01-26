@@ -14,16 +14,13 @@ import java.util.Date;
 
 @Data
 @AllArgsConstructor
+@Builder
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Builder
 public class BookingDetailRequest {
-    String bookingId;
     String roomId;
     LocalDateTime checkInDate;
     LocalDateTime checkOutDate;
-    int adult;
-    int child;
-    Promotion promotion;
-    BookingStatus bookingStatusId;
+    Integer adult;
+    Integer child;
 }
