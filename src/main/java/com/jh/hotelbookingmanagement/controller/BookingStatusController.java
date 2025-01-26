@@ -19,40 +19,39 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bookingStatus")
+@CrossOrigin(origins = "http://localhost:5173")
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BookingStatusController {
     BookingStatusService bookingStatusService;
 
     @PostMapping
-    ApiResponse<BookingStatusResponse> createBooking(@RequestBody BookingStatusRequest request) {
-        return ApiResponse.<BookingStatusResponse>builder().result(bookingStatusService.createBookingStatus(request)).build();
+    public ApiResponse<BookingStatusResponse> createBookingStatus(@RequestBody BookingStatusRequest request) {
+        return ApiResponse.<BookingStatusResponse>builder()
+                .result(bookingStatusService.createBookingStatus(request))
+                .build();
     }
 
     @GetMapping
-    ApiResponse<List<BookingStatusResponse>> getBookings() {
+    public ApiResponse<List<BookingStatusResponse>> getAllBookingStatuses() {
         return ApiResponse.<List<BookingStatusResponse>>builder()
                 .result(bookingStatusService.getAllBookingStatus())
                 .build();
     }
-//
-//    @GetMapping("/{bookingId}")
-//    BookingResponse getBooking(@PathVariable("bookingId") String bookingId) {
-//        return bookingService.getBooking(bookingId);
-//    }
 
     @PutMapping("/{bookingStatusId}")
-    BookingStatusResponse updatebookingStatus(@PathVariable Long bookingStatusId, @RequestBody BookingStatusRequest request) {
-        return bookingStatusService.updateBookingStatus(bookingStatusId, request);
+    public ApiResponse<BookingStatusResponse> updateBookingStatus(
+            @PathVariable Long bookingStatusId,
+            @RequestBody BookingStatusRequest request) {
+        return ApiResponse.<BookingStatusResponse>builder()
+                .result(bookingStatusService.updateBookingStatus(bookingStatusId, request))
+                .build();
     }
-//
+
     @DeleteMapping("/{bookingStatusId}")
-    ApiResponse<String> deletebookingStatus(@PathVariable Long bookingStatusId) {
+    public ApiResponse<String> deleteBookingStatus(@PathVariable Long bookingStatusId) {
         bookingStatusService.deleteBookingStatus(bookingStatusId);
-        return ApiResponse.<String>builder().result("This booking status has been Deleted!").build();
+        return ApiResponse.<String>builder()
+                .result("Booking status deleted successfully")
+                .build();
     }
-//
-//    @GetMapping("/usersId:a{userId}")
-//    List<Booking> getBookingsByUser(@PathVariable String userId) {
-//        return bookingService.getBookingsByUser(userId);
-//    }
 }

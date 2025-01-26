@@ -25,5 +25,7 @@ public interface RoomMapper {
     List<RoomResponse> toRoomRespone(List<Room> rooms);
 
     @Mapping(target = "branch", ignore = true)
+    @Mapping(target = "roomStatusId", ignore = true)
+    @Mapping(target = "roomTypeId", ignore = true)
     void updateRoom(@MappingTarget Room room, RoomUpdateRequest request);
 }

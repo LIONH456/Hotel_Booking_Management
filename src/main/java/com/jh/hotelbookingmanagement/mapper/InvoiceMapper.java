@@ -31,7 +31,7 @@ public interface InvoiceMapper {
     void updateInvoice(@MappingTarget Invoice invoice, InvoiceRequest request);
 
     default String map(BookingStatus value) {
-        return value != null ? value.getBookingStatus() : null;
+        return value != null ? value.getBookingStatusName() : null;
     }
 
 //    @Mapping(target = "roles", ignore = true)

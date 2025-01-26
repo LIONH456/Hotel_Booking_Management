@@ -19,8 +19,8 @@ public class BookingStatus {
     @Column(name = "booking_status_id")
     private Long bookingStatusId;
     
-    @Column(name = "booking_status")
-    private String bookingStatus;
+    @Column(name = "booking_status_name")
+    private String bookingStatusName;
     
     private String description;
 

@@ -26,28 +26,39 @@ public class BookingStatusServiceImplement implements BookingStatusService {
 
     @Override
     public BookingStatusResponse createBookingStatus(BookingStatusRequest request) {
+        log.info("Creating booking status with name: {}", request.getBookingStatusName());
         BookingStatus bookingStatus = bookingStatusMapper.toBookingStatus(request);
-
         bookingStatus = bookingStatusRepository.save(bookingStatus);
         return bookingStatusMapper.toBookingStatusResponse(bookingStatus);
     }
 
     @Override
     public List<BookingStatusResponse> getAllBookingStatus() {
-        return bookingStatusRepository.findAll().stream()
-                .map(bookingStatusMapper::toBookingStatusResponse).toList();
+        log.info("Fetching all booking statuses");
+        List<BookingStatus> statuses = bookingStatusRepository.findAll();
+        log.info("Found {} booking statuses", statuses.size());
+        return statuses.stream()
+                .map(bookingStatusMapper::toBookingStatusResponse)
+                .toList();
     }
 
     @Override
     public BookingStatusResponse updateBookingStatus(Long bookingStatusId, BookingStatusRequest request) {
+        log.info("Updating booking status with id: {}", bookingStatusId);
         BookingStatus bookingStatus = bookingStatusRepository.findById(bookingStatusId)
-                .orElseThrow(()->new AppException(ErrorCode.BOOKING_METHOD_NOT_FOUND));
+                .orElseThrow(() -> new AppException(ErrorCode.BOOKING_STATUS_NOT_FOUND));
+        
         bookingStatusMapper.updateBookingStatus(bookingStatus, request);
-        return bookingStatusMapper.toBookingStatusResponse(bookingStatusRepository.save(bookingStatus));
+        bookingStatus = bookingStatusRepository.save(bookingStatus);
+        return bookingStatusMapper.toBookingStatusResponse(bookingStatus);
     }
 
     @Override
     public void deleteBookingStatus(Long bookingStatusId) {
+        log.info("Deleting booking status with id: {}", bookingStatusId);
+        if (!bookingStatusRepository.existsById(bookingStatusId)) {
+            throw new AppException(ErrorCode.BOOKING_STATUS_NOT_FOUND);
+        }
         bookingStatusRepository.deleteById(bookingStatusId);
     }
 }

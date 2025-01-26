@@ -60,7 +60,7 @@ public class RoomService {
                 roomRepository.findById(roomId).orElseThrow(() -> new AppException(ErrorCode.ROOM_NOT_FOUND)));
     }
 
-    public List<RoomResponse> getAllRoomByUser(String branchId) {
+    public List<RoomResponse> getAllRoomByBranch(String branchId) {
         List<Room> rooms = roomRepository.findAllByBranch_BranchId(branchId);
         if (rooms.isEmpty()) {
             throw new AppException(ErrorCode.ROOM_NOT_FOUND);
@@ -74,7 +74,17 @@ public class RoomService {
 
     public RoomResponse updateRoom(String roomId, RoomUpdateRequest request) {
         Room room = roomRepository.findById(roomId).orElseThrow(() -> new AppException(ErrorCode.ROOM_NOT_FOUND));
+        // Set branch
+        room.setBranch(branchRepository.findById(request.getBranchId())
+                .orElseThrow(() -> new AppException(ErrorCode.BRANCH_NOT_FOUND)));
 
+        // Set room status
+        room.setRoomStatusId(roomStatusRepository.findById(request.getRoomStatusId())
+                .orElseThrow(() -> new AppException(ErrorCode.ROOM_STATUS_NOT_FOUND)));
+
+        // Set room type
+        room.setRoomTypeId(roomTypeRepository.findById(request.getRoomTypeId())
+                .orElseThrow(() -> new AppException(ErrorCode.ROOM_TYPE_NOT_FOUND)));
         roomMapper.updateRoom(room, request);
 
         return roomMapper.toRoomRespone(roomRepository.save(room));

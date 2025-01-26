@@ -46,7 +46,7 @@ public class RoomController {
     public ApiResponse<List<RoomResponse>> getAllRoomsByUser(@RequestParam String branchId) {
         // String managerId = principal.getName(); // Assuming the manager's ID is stored in the Principal
         return ApiResponse.<List<RoomResponse>>builder()
-                .result(roomService.getAllRoomByUser(branchId))
+                .result(roomService.getAllRoomByBranch(branchId))
                 .build();
     }
 

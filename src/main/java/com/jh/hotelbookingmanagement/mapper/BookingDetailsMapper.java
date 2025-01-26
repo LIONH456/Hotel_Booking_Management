@@ -29,7 +29,7 @@ public interface BookingDetailsMapper {
 
     @Mapping(target = "bookingId", source = "booking.bookingId")
     @Mapping(target = "roomId", source = "room.roomId")
-    @Mapping(target = "bookingStatus", source = "bookingStatus.bookingStatus")
+    @Mapping(target = "bookingStatus", source = "bookingStatus.bookingStatusName")
     BookingDetailResponse toBookingDetailResponse(BookingDetail bookingDetail);
 
     @Mapping(target = "booking", ignore = true)
@@ -38,6 +38,6 @@ public interface BookingDetailsMapper {
     void updateBookingDetail(@MappingTarget BookingDetail bookingDetail, BookingDetailUpdateRequest request);
 
     default String map(BookingStatus value) {
-        return value != null ? value.getBookingStatus() : null;
+        return value != null ? value.getBookingStatusName() : null;
     }
 }

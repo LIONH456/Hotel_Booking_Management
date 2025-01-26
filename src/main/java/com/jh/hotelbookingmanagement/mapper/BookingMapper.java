@@ -31,6 +31,6 @@ public interface BookingMapper {
 
     @Mapping(target = "bookingId", source = "booking.bookingId")
     @Mapping(target = "roomId", source = "room.roomId")
-    @Mapping(target = "bookingStatus", source = "bookingStatus.bookingStatus")
+    @Mapping(target = "bookingStatus", source = "bookingStatus.bookingStatusName")
     BookingDetailResponse toBookingDetailResponse(BookingDetail bookingDetail);
 }

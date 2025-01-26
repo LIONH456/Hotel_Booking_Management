@@ -54,6 +54,7 @@ public enum ErrorCode {
     ROOM_NOT_AVAILABLE(1026, "Room Is not availiable during this time", HttpStatus.BAD_REQUEST),
     ROLE_NOT_FOUND(1027, "Role not found", HttpStatus.NOT_FOUND),
     USER_UPDATE_FAILED(1028, "Failed to update", HttpStatus.BAD_REQUEST),
+    BOOKING_STATUS_NOT_FOUND(1029, "Booking Status Not Found", HttpStatus.NOT_FOUND)
     ;
 
     ErrorCode(int code, String message, HttpStatusCode statusCode) {
@@ -75,5 +76,6 @@ public enum ErrorCode {
         }
         return formattedMessage;
     }
+
 
 }
